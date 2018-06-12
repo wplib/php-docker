@@ -1,0 +1,143 @@
+pkgname=php
+pkgver=${PACKAGE_VERSION}
+#pkgdir=${PACKAGE_ROOT}
+pkgrel=1
+arch=('i686' 'x86_64')
+license=('PHP')
+url='http://www.php.net'
+source=("http://www.php.net/distributions/php-${pkgver}.tar.gz")
+md5sums=("${PACKAGE_MD5}")
+
+CFLAGS="-fstack-protector-strong -fpic -fpie -O2"
+export CFLAGS
+CPPFLAGS="$CFLAGS"
+export CPPFLAGS
+LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"
+export LDFLAGS
+
+
+check()
+{
+	echo "# WPLib: PHP ${PACKAGE_VERSION} - test function."
+
+	cd ${pkgname}-${pkgver}
+
+	# make test
+}
+
+build()
+{
+	echo "# WPLib: PHP ${PACKAGE_VERSION} - build function."
+
+	cd ${pkgname}-${pkgver}
+
+	EXTENSION_DIR=/usr/lib/php/modules ./configure --config-cache \
+	--prefix=/usr \
+	--sysconfdir=/etc/php \
+	--localstatedir=/var \
+	--with-layout=GNU \
+	--with-config-file-path=/etc/php \
+	--with-config-file-scan-dir=/etc/php/conf.d \
+	--mandir=/usr/share/man \
+	--enable-inline-optimization \
+	--enable-option-checking=fatal \
+	--enable-fpm --with-fpm-user=${WPLIB_USER} --with-fpm-group=${WPLIB_GROUP} \
+	--disable-debug \
+	--disable-rpath \
+	--disable-static \
+	--enable-shared \
+	--with-pic \
+	--enable-cgi \
+	--enable-cli \
+	--with-mhash \
+	--with-pear \
+	--with-readline \
+	--with-libedit \
+	--enable-phpdbg \
+	--enable-bcmath=shared \
+	--with-bz2=shared \
+	--enable-calendar=shared \
+	--with-cdb \
+	--enable-ctype=shared \
+	--with-curl=shared \
+	--with-enchant=shared \
+	--with-freetype-dir=shared,/usr \
+	--enable-ftp=shared \
+	--enable-exif=shared \
+	--with-gd=shared --enable-gd-native-ttf \
+	--with-png-dir=shared,/usr \
+	--with-gettext=shared \
+	--with-gmp=shared \
+	--with-iconv=shared \
+	--with-icu-dir=/usr \
+	--with-imap=shared \
+	--with-imap-ssl=shared \
+	--enable-intl=shared \
+	--with-jpeg-dir=shared,/usr \
+	--enable-json=shared \
+	--with-ldap=shared \
+	--enable-mbregex \
+	--enable-mbstring=all \
+	--with-mcrypt=shared \
+	--with-mysql=shared,mysqlnd --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysqli=shared,mysqlnd \
+	--with-openssl=shared \
+	--with-pcre-regex=/usr \
+	--enable-pcntl=shared \
+	--enable-phar=shared \
+	--enable-posix=shared \
+	--with-pspell=shared \
+	--with-regex=php \
+	--enable-session \
+	--enable-shmop=shared \
+	--with-snmp=shared \
+	--enable-soap=shared \
+	--enable-sockets=shared \
+	--enable-sysvmsg=shared --enable-sysvsem=shared --enable-sysvshm=shared \
+	--with-unixODBC=shared,/usr \
+	--enable-dom=shared --enable-libxml=shared --enable-xml=shared --enable-xmlreader=shared --with-xmlrpc=shared --with-xsl=shared \
+	--enable-wddx=shared \
+	--enable-zip=shared --with-zlib=shared \
+	--enable-dba=shared \
+	--with-gdbm=shared \
+	--with-db4=shared \
+	--without-db1 --without-db2 --without-db3 --without-qdbm \
+	--with-sqlite3=shared,/usr \
+	--with-mssql=shared \
+	--enable-pdo=shared \
+	--with-pdo-mysql=shared,mysqlnd \
+	--with-pdo-odbc=shared,unixODBC,/usr \
+	--with-pdo-pgsql=shared \
+	--with-pdo-sqlite=shared,/usr \
+	--with-pdo-dblib=shared \
+	--with-pgsql=shared \
+	--enable-opcache
+
+
+	make
+}
+
+package()
+{
+	echo "# WPLib: PHP ${PACKAGE_VERSION} - package function."
+
+	pkgdesc='An HTML-embedded scripting language'
+	# depends=('pcre' 'bzip2')
+	# backup=('etc/php/php.ini')
+
+	# pkgdir should be empty here.
+	# If it's set to "/" then the build will hang.
+	#pkgdir=""
+
+	cd ${pkgname}-${pkgver}
+	make -j1 INSTALL_ROOT=${pkgdir} install
+	# install -D -m644 php.ini-production ${pkgdir}/etc/php/php.ini
+	install -d -m755 ${pkgdir}/etc/php/conf.d/
+
+	# remove empty directory
+	rmdir ${pkgdir}/usr/include/php/include
+
+	# Fixup pecl errors.
+	# EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php on line 249"
+	#     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
+	# sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' ${pkgdir}/usr/bin/pecl
+}

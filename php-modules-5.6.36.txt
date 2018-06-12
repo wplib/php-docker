@@ -1,0 +1,49 @@
+[PHP Modules]
+bcmath
+Core
+ctype
+curl
+date
+dom
+ereg
+exif
+fileinfo
+filter
+ftp
+gd
+gettext
+hash
+iconv
+imagick
+intl
+json
+libxml
+mbstring
+mcrypt
+mhash
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+pspell
+readline
+Reflection
+session
+SimpleXML
+sockets
+SPL
+standard
+tokenizer
+xdebug
+xml
+xmlreader
+xmlrpc
+xmlwriter
+Zend OPcache
+zip
+
+[Zend Modules]
+Xdebug
+Zend OPcache
+

@@ -1,0 +1,15 @@
+{
+	"project": "wplib",
+	"name": "php",
+	"version": "5.5.38",
+	"majorversion": "5.5",
+	"latest": "",
+	"class": "processvm",
+	"network": "--network wplibbox",
+	"ports": "-p 9000:9000",
+	"volumes": "-v /var/www:/var/www -v /srv/sites:/srv/sites",
+	"restart": "--restart no",
+	"args": "--add-host 'mailhog:172.42.0.1'",
+	"env": "PHP_VERSION"
+}
+

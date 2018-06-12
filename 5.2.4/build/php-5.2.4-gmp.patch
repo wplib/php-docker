@@ -1,0 +1,11 @@
+--- /tmp/gmp.c	2018-06-12 10:39:12.248064980 +0000
++++ php-5.2.4/ext/gmp/gmp.c	2018-06-12 10:39:42.958065442 +0000
+@@ -1396,7 +1396,7 @@
+ 
+ 		GMPG(rand_initialized) = 1;
+ 	}
+-	mpz_urandomb(*gmpnum_result, GMPG(rand_state), GMP_ABS (limiter) * __GMP_BITS_PER_MP_LIMB);
++	mpz_urandomb(*gmpnum_result, GMPG(rand_state), GMP_ABS (limiter) * GMP_LIMB_BITS);
+ 
+ 	ZEND_REGISTER_RESOURCE(return_value, gmpnum_result, le_gmp);
+ }
