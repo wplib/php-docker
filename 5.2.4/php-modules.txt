@@ -1,0 +1,46 @@
+Failed loading /usr/lib/php/modules/opcache.so:  Error loading shared library /usr/lib/php/modules/opcache.so: No such file or directory
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/intl.so' - Error loading shared library /usr/lib/php/modules/intl.so: No such file or directory in Unknown on line 0
+PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'mbstring.so'  in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/openssl.so' - Error loading shared library /usr/lib/php/modules/openssl.so: No such file or directory in Unknown on line 0
+[PHP Modules]
+bcmath
+ctype
+curl
+date
+dom
+exif
+filter
+ftp
+gd
+gettext
+hash
+iconv
+imagick
+json
+libxml
+mbstring
+mcrypt
+mysqli
+pcntl
+pcre
+PDO
+pspell
+readline
+Reflection
+session
+SimpleXML
+sockets
+SPL
+SQLite
+standard
+tokenizer
+xdebug
+xml
+xmlreader
+xmlrpc
+xmlwriter
+zip
+
+[Zend Modules]
+Xdebug
+
