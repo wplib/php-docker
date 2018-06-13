@@ -47,8 +47,6 @@ apk add --no-cache --virtual wplib.build $BUILD_DEPS; checkExit
 echo "# WPLib: Creating user accounts."
 echo "%${WPLIB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 mkdir /var/mail; checkExit
-#addgroup -g 82 -S www-data; checkExit
-#adduser -u 82 -D -S -G www-data www-data; checkExit
 groupadd -g ${WPLIB_UID} ${WPLIB_USER}; checkExit
 useradd -d /home/${WPLIB_USER} -c "WPLib ${WPLIB_USER} user" -u ${WPLIB_UID} -g ${WPLIB_GID} -N -s /bin/bash ${WPLIB_USER}; checkExit
 
