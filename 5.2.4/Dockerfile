@@ -34,4 +34,4 @@ RUN	/bin/sh /build/build.sh && \
 WORKDIR /var/www
 USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
-CMD ["/usr/sbin/php-fpm", "-F"]
+CMD ["/usr/sbin/php-fpm", "-x"]
