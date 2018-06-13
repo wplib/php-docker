@@ -35,7 +35,7 @@ fi
 
 echo "# WPLib: Configure PHP ${PACKAGE_VERSION}."
 cd /build; checkExit
-wget -O "php-${PACKAGE_VERSION}" -nv "$PACKAGE_URL"; checkExit
+wget -O "php-${PACKAGE_VERSION}.tar.gz" -nv "$PACKAGE_URL"; checkExit
 tar zxf php-${PACKAGE_VERSION}.tar.gz; checkExit
 cd php-${PACKAGE_VERSION}; checkExit
 BUILDDIR="/build/php-${PACKAGE_VERSION}"
