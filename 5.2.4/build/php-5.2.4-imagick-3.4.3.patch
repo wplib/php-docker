@@ -1,0 +1,45 @@
+--- /tmp/imagick.c	2018-06-13 04:56:03.927246021 +0000
++++ imagick.c	2018-06-13 04:57:07.313623896 +0000
+@@ -3681,7 +3681,7 @@
+ 	INIT_CLASS_ENTRY(ce, PHP_IMAGICKKERNEL_SC_NAME, php_imagickkernel_class_methods);
+ 	ce.create_object = php_imagickkernel_object_new;
+ 	// Disabled until can be compiled under wall correctly
+-	imagickkernel_object_handlers.get_debug_info = php_imagickkernel_get_debug_info;
++	//imagickkernel_object_handlers.get_debug_info = php_imagickkernel_get_debug_info;
+ 	imagickkernel_object_handlers.clone_obj = php_imagick_clone_imagickkernel_object;
+ 	#ifdef ZEND_ENGINE_3
+ 	imagickkernel_object_handlers.offset = XtOffsetOf(php_imagickkernel_object, zo);
+@@ -3819,7 +3819,8 @@
+ #ifdef HAVE_SPL
+ 	ZEND_MOD_REQUIRED("spl")
+ #endif
+-	ZEND_MOD_END
++	{NULL, NULL, NULL}
++	// ZEND_MOD_END
+ };
+ #endif
+
+--- /tmp/imagick_helpers.c	2018-06-13 04:55:34.292004231 +0000
++++ imagick_helpers.c	2018-06-13 04:55:47.851657327 +0000
+@@ -103,7 +103,7 @@
+ 	fci.retval = &retval;
+ #else
+ 	retval_ptr = NULL;
+-	fci.object_ptr = NULL;
++	fci.object_pp = NULL;
+ 	fci.function_name = callback->user_callback;
+ 	fci.retval_ptr_ptr = &retval_ptr;
+ #endif
+--- /tmp/imagick_class.c	2018-06-13 05:01:50.410225766 +0000
++++ imagick_class.c	2018-06-13 05:01:59.533985242 +0000
+@@ -24,6 +24,10 @@
+ #include "php_imagick_helpers.h"
+ #include "php_imagick_file.h"
+
++#ifndef Z_ADDREF_P
++#define Z_ADDREF_P(pz)     (++(pz)->refcount)
++#endif
++
+
+ #if MagickLibVersion > 0x628
+ /* {{{ proto bool Imagick::pingImageFile(resource filehandle)

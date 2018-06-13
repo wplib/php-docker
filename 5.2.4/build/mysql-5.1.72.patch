@@ -1,0 +1,24 @@
+--- /tmp/configure	2018-06-13 01:37:32.628875925 +0000
++++ mysql-5.1.72/configure	2018-06-13 02:12:23.628907385 +0000
+@@ -25063,9 +25063,9 @@
+         { $as_echo "$as_me:$LINENO: result: \"starting\"" >&5
+ $as_echo "\"starting\"" >&6; }
+         # use getconf to check glibc contents
+-        { $as_echo "$as_me:$LINENO: checking \"getconf GNU_LIBPTHREAD_VERSION\"" >&5
+-$as_echo_n "checking \"getconf GNU_LIBPTHREAD_VERSION\"... " >&6; }
+-        case `getconf GNU_LIBPTHREAD_VERSION | tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ` in
++        { $as_echo "$as_me:$LINENO: checking \"getconf _POSIX_THREADS\"" >&5
++$as_echo_n "checking \"getconf _POSIX_THREADS\"... " >&6; }
++        case `getconf _POSIX_THREADS | tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ` in
+         NPTL* )
+                 { $as_echo "$as_me:$LINENO: result: \"NPTL\"" >&5
+ $as_echo "\"NPTL\"" >&6; }
+@@ -25076,7 +25076,7 @@
+
+                 with_named_thread="-lpthread"
+                 ;;
+-        LINUXTHREADS* )
++        LINUXTHREADS* | '200809')
+                 { $as_echo "$as_me:$LINENO: result: \"Linuxthreads\"" >&5
+ $as_echo "\"Linuxthreads\"" >&6; }
+
