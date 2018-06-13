@@ -2,6 +2,7 @@
   <section name="global_options">
     <value name="pid_file">/var/run/php/php-fpm.pid</value>
     <value name="error_log">/proc/self/fd/2</value>
+    <value name="log_level">notice</value>
     <value name="emergency_restart_threshold">10</value>
     <value name="emergency_restart_interval">1m</value>
     <value name="process_control_timeout">5s</value>
@@ -32,6 +33,9 @@
           <value name="MaxSpareServers">16</value>
         </value>
       </value>
+      <value name="request_terminate_timeout">0s</value>
+      <value name="request_slowlog_timeout">0s</value>
+      <value name="slowlog">logs/slow.log</value>
       <value name="rlimit_files">65535</value>
       <value name="rlimit_core">0</value>
       <value name="chroot"></value>
