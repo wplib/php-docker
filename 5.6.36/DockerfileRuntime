@@ -1,0 +1,16 @@
+FROM wplib/php-base:5.6.36
+
+MAINTAINER WPLib Team <team@wplib.org>
+
+################################################################################
+ENV BASE_BUILD $BASE_BUILD
+
+COPY container.json /etc/container.json
+COPY files /
+
+RUN	chmod a+x /usr/local/bin/* && /build/cleanup.sh
+
+WORKDIR /var/www
+# USER vagrant
+# ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
+CMD ["/usr/sbin/php-fpm", "-x"]

@@ -1,11 +1,6 @@
 #
 # Standard version level Makefile used to build a Docker container for WPLib - https://github.com/wplib/wplib-box/
 #
-# ARG PACKAGE_VERSION=5.3.29
-# ARG WPLIB_USER="vagrant"
-# ARG WPLIB_UID="1000"
-# ARG WPLIB_GROUP="vagrant"
-# ARG WPLIB_GID="1000"
 
 
 # Determine whether we use "nodeJS" or "JQ".
@@ -50,12 +45,22 @@ RESTART		:= $(call GetFromPkg,restart)
 ARGS		:= $(call GetFromPkg,args)
 ENV		:= $(call GetFromPkg,env)
 
-IMAGE_NAME	?= $(PROJECT)/$(NAME)
-CONTAINER_NAME	?= $(NAME)-$(VERSION)
-CONTAINER_JSON	?= '$(call rawJSON)'
 
 LOGFILE := $(shell date +'build-%Y%m%d-%H%M%S.log')
 
+ifeq ($(BUILD_TYPE),)
+DOCKERFILE	:= DockerfileRuntime
+BUILD_ARGS	:= --squash
+NAME		:= $(NAME)
+else
+DOCKERFILE	:= DockerfileBase
+BUILD_ARGS	:= --build-arg BUILD_TYPE="$(BUILD_TYPE)"
+NAME		:= $(NAME)-$(BUILD_TYPE)
+endif
+
+IMAGE_NAME	?= $(PROJECT)/$(NAME)
+CONTAINER_NAME	?= $(NAME)-$(VERSION)
+CONTAINER_JSON	?= '$(call rawJSON)'
 
 .PHONY: build push release clean list inspect test create shell run start stop rm
 
@@ -64,11 +69,19 @@ LOGFILE := $(shell date +'build-%Y%m%d-%H%M%S.log')
 default: build
 
 
-build: Dockerfile
+build-base: $(DOCKERFILE)
+	@make build BUILD_TYPE="base"
+
+
+clean-base: $(DOCKERFILE)
+	@make clean BUILD_TYPE="base"
+
+
+build: $(DOCKERFILE)
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" .
+	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f $(DOCKERFILE) .
 ifneq ($(MAJORVERSION),)
 	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
