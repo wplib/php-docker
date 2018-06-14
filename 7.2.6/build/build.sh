@@ -1,156 +1,191 @@
 #!/bin/sh
 
+# ssh-keygen -A
+
+
 checkExit()
 {
 	if [ "$?" != "0" ]
 	then
-		echo "# WPLib: Exit reason \"$@\""
+		echo "# WPLib Box: Exit reason \"$@\""
 		exit $?
 	fi
 }
 
-BUILD_DEPS="autoconf binutils bison coreutils dpkg fakeroot file g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libressl2.6-libcrypto make musl pacman pkgconf re2c rsync aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev libc-dev libedit-dev libmcrypt-dev libpng-dev readline-dev libressl-dev libxml2-dev libxpm-dev libxslt-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev sqlite-dev unixodbc-dev"
-
-PERSIST_DEPS="bash sudo wget curl gnupg imagemagick openssl shadow pcre ca-certificates curl tar xz libressl"
-
-apk update; checkExit
-echo "# WPLib: Adding packages."
-apk add --no-cache --virtual wplib.persist $PERSIST_DEPS; checkExit
-apk add --no-cache --virtual wplib.build $BUILD_DEPS; checkExit
-
-echo "%${WPLIB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-echo "# WPLib: Creating user accounts."
-mkdir /var/mail; checkExit
-addgroup -g 82 -S www-data; checkExit
-adduser -u 82 -D -S -G www-data www-data; checkExit
-groupadd -g ${WPLIB_UID} ${WPLIB_USER}; checkExit
-useradd -d /home/${WPLIB_USER} -c "WPLib ${WPLIB_USER} user" -u ${WPLIB_UID} -g ${WPLIB_GID} -N -s /bin/bash ${WPLIB_USER}; checkExit
 
 if [ ! -d /build ]
 then
-	echo "# WPLib: /build doesn't exist."
+	echo "# WPLib Box: /build doesn't exist."
 	exit
 fi
 
-echo "# WPLib: Configure PHP ${PACKAGE_VERSION}."
-cd /build; checkExit
-wget -O "php-${PACKAGE_VERSION}.tar.gz" -nv "$PACKAGE_URL"; checkExit
-tar zxf php-${PACKAGE_VERSION}.tar.gz; checkExit
-cd php-${PACKAGE_VERSION}; checkExit
-BUILDDIR="/build/php-${PACKAGE_VERSION}"
+
+# BUILD_DEPS="build-base autoconf apache2-dev aspell-dev bison bzip2-dev curl-dev db-dev enchant-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imap-dev krb5-dev libedit-dev libical-dev libjpeg-turbo-dev libpng-dev libressl-dev libsodium-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev re2c recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev imagemagick autoconf binutils bison coreutils fakeroot file g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libressl2.6-libcrypto make musl pacman pkgconf re2c rsync aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev libc-dev libedit-dev libmcrypt-dev libpng-dev readline-dev libressl-dev libxml2-dev libxpm-dev libxslt-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev sqlite-dev unixodbc-dev"
+BUILD_BINS="autoconf binutils bison build-base coreutils fakeroot file g++ gcc gnupg gpgme imagemagick libarchive libarchive-tools libcurl libintl libressl2.6-libcrypto make musl pacman pkgconf re2c rsync"
+BUILD_LIBS="apache2-dev aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev krb5-dev libc-dev libedit-dev libical-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev libressl-dev libsodium-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev readline-dev recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev"
+BUILD_DEPS="${BUILD_BINS} ${BUILD_LIBS}"
+
+PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar xz"
+
+BUILDDIR="/build"
+PHPDIR="${BUILDDIR}/php-${PACKAGE_VERSION}"
+MYSQL_VERSION="5.1.72"
+MYSQLDIR="${BUILDDIR}/mysql-${MYSQL_VERSION}"
+BISON_VERSION="2.3"
+BISONDIR="${BUILDDIR}/bison-${BISON_VERSION}"
 
 CFLAGS="-fstack-protector-strong -fpic -fpie -O2"; export CFLAGS
 CPPFLAGS="$CFLAGS"; export CPPFLAGS
 LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"; export LDFLAGS
 EXTENSION_DIR=/usr/lib/php/modules; export EXTENSION_DIR
 
-./configure --config-cache \
-	--prefix=/usr --cache-file=config.cache \
-	--sysconfdir=/etc/php \
+
+echo "# WPLib Box: Adding packages."
+apk update; checkExit
+apk add --no-cache --virtual wplib.persist $PERSIST_DEPS; checkExit
+apk add --no-cache --virtual wplib.build $BUILD_DEPS; checkExit
+
+
+echo "# WPLib Box: Creating user accounts."
+echo "%${WPLIB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+mkdir /var/mail; checkExit
+groupadd -g ${WPLIB_UID} ${WPLIB_USER}; checkExit
+useradd -d /home/${WPLIB_USER} -c "WPLib Box ${WPLIB_USER} user" -u ${WPLIB_UID} -g ${WPLIB_GID} -N -s /bin/bash ${WPLIB_USER}; checkExit
+
+
+echo "# WPLib Box: Fetching tarballs."
+cd /build; checkExit
+wget -nv -O "php-${PACKAGE_VERSION}.tar.gz" -nv "$PACKAGE_URL"; checkExit
+tar zxf php-${PACKAGE_VERSION}.tar.gz; checkExit
+
+
+echo "# WPLib: Patching PHP ${PACKAGE_VERSION}."
+cd ${BUILDDIR}; checkExit
+patch -p0 < install-pear.patch; checkExit
+# patch -p0 < libressl-2.7.patch; checkExit
+patch -p0 < allow-build-recode-and-imap-together.patch; checkExit
+
+
+echo "# WPLib Box: Configure PHP ${PACKAGE_VERSION}."
+cd ${PHPDIR}; checkExit
+autoconf; checkExit
+./configure --config-cache --cache-file=config.cache \
+	--enable-fpm --with-fpm-user=${WPLIB_USER} --with-fpm-group=${WPLIB_GROUP} \
+	--datadir=/usr/share/php \
+	--disable-gd-jis-conv \
+	--disable-short-tags \
+	--enable-bcmath=shared \
+	--enable-calendar=shared \
+	--enable-ctype=shared \
+	--enable-dba=shared \
+	--enable-dom=shared \
+	--enable-exif=shared \
+	--enable-fileinfo=shared \
+	--enable-ftp=shared \
+	--enable-intl=shared \
+	--enable-json=shared \
+	--enable-libxml \
+	--enable-mbstring=shared \
+	--enable-mysqlnd=shared \
+	--enable-opcache=shared \
+	--enable-pcntl=shared \
+	--enable-pdo=shared \
+	--enable-phar=shared \
+	--enable-posix=shared \
+	--enable-session=shared \
+	--enable-shmop=shared \
+	--enable-simplexml=shared \
+	--enable-soap=shared \
+	--enable-sockets=shared \
+	--enable-sysvmsg=shared \
+	--enable-sysvsem=shared \
+	--enable-sysvshm=shared \
+	--enable-tokenizer=shared \
+	--enable-wddx=shared \
+	--enable-xml=shared \
+	--enable-xmlreader=shared \
+	--enable-xmlwriter=shared \
+	--enable-zip=shared \
+	--libdir=/usr/lib/php \
 	--localstatedir=/var \
-	--with-layout=GNU \
+	--prefix=/usr \
+	--sysconfdir=/etc/php \
+	--with-bz2=shared \
 	--with-config-file-path=/etc/php \
 	--with-config-file-scan-dir=/etc/php/conf.d \
-	--mandir=/usr/share/man \
-	--enable-inline-optimization \
-	--enable-option-checking=fatal \
-	--enable-fpm --with-fpm-user=${WPLIB_USER} --with-fpm-group=${WPLIB_GROUP} \
-	--disable-debug \
-	--disable-rpath \
-	--disable-static \
-	--enable-shared \
-	--with-pic \
-	--enable-cgi \
-	--enable-cli \
-	--with-mhash \
-	--with-pear \
-	--with-readline \
-	--with-libedit \
-	--enable-phpdbg \
-	--enable-bcmath=shared \
-	--with-bz2=shared \
-	--enable-calendar=shared \
-	--with-cdb \
-	--enable-ctype=shared \
 	--with-curl=shared \
+	--with-db4 \
+	--with-dbmaker=shared \
 	--with-enchant=shared \
-	--with-freetype-dir=shared,/usr \
-	--enable-ftp=shared \
-	--enable-exif=shared \
-	--with-gd=shared --enable-gd-native-ttf \
-	--with-png-dir=shared,/usr \
+	--with-freetype-dir=/usr \
+	--with-gd=shared \
+	--with-gdbm \
 	--with-gettext=shared \
 	--with-gmp=shared \
 	--with-iconv=shared \
 	--with-icu-dir=/usr \
+	--with-imap-ssl \
 	--with-imap=shared \
-	--with-imap-ssl=shared \
-	--enable-intl=shared \
-	--with-jpeg-dir=shared,/usr \
-	--enable-json=shared \
+	--with-jpeg-dir=/usr \
+	--with-kerberos \
+	--with-layout=GNU \
+	--with-ldap-sasl \
 	--with-ldap=shared \
-	--enable-mbregex \
-	--enable-mbstring=all \
-	--with-mcrypt=shared \
-	--with-mysql=shared,mysqlnd --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysqli=shared,mysqlnd \
+	--with-libedit \
+	--with-libxml-dir=/usr \
+	--with-libzip=/usr \
+	--with-mysql-sock=/run/mysqld/mysqld.sock \
+	--with-mysqli=shared,mysqlnd \
 	--with-openssl=shared \
 	--with-pcre-regex=/usr \
-	--enable-pcntl=shared \
-	--enable-phar=shared \
-	--enable-posix=shared \
-	--with-pspell=shared \
-	--with-regex=php \
-	--enable-session \
-	--enable-shmop=shared \
-	--with-snmp=shared \
-	--enable-soap=shared \
-	--enable-sockets=shared \
-	--enable-sysvmsg=shared --enable-sysvsem=shared --enable-sysvshm=shared \
-	--with-unixODBC=shared,/usr \
-	--enable-dom=shared --enable-libxml=shared --enable-xml=shared --enable-xmlreader=shared --with-xmlrpc=shared --with-xsl=shared \
-	--enable-wddx=shared \
-	--enable-zip=shared --with-zlib=shared \
-	--enable-dba=shared \
-	--with-gdbm=shared \
-	--with-db4=shared \
-	--without-db1 --without-db2 --without-db3 --without-qdbm \
-	--with-sqlite3=shared,/usr \
-	--with-mssql=shared \
-	--enable-pdo=shared \
+	--with-pdo-dblib=shared \
 	--with-pdo-mysql=shared,mysqlnd \
 	--with-pdo-odbc=shared,unixODBC,/usr \
 	--with-pdo-pgsql=shared \
 	--with-pdo-sqlite=shared,/usr \
-	--with-pdo-dblib=shared \
+	--with-pear=/usr/share/php \
 	--with-pgsql=shared \
-	--enable-opcache; checkExit
+	--with-pic \
+	--with-png-dir=/usr \
+	--with-pspell=shared \
+	--with-recode=shared \
+	--with-snmp=shared \
+	--with-sodium=shared \
+	--with-sqlite3=shared,/usr \
+	--with-system-ciphers \
+	--with-tidy=shared \
+	--with-unixODBC=shared,/usr \
+	--with-webp-dir=/usr \
+	--with-xmlrpc=shared \
+	--with-xpm-dir=/usr \
+	--with-xsl=shared \
+	--with-zlib \
+	--with-zlib-dir=/usr \
+	--without-readline; checkExit
 
-echo "# WPLib: Compile PHP ${PACKAGE_VERSION}."
+#	--enable-gd-native-ttf
+
+echo "# WPLib Box: Compile PHP ${PACKAGE_VERSION}."
 make; checkExit
-echo "# WPLib: Install PHP ${PACKAGE_VERSION}."
+
+echo "# WPLib Box: Install PHP ${PACKAGE_VERSION}."
 make install; checkExit
 install -d -m755 /etc/php/conf.d/; checkExit
 rmdir /usr/include/php/include; checkExit
 mkdir -p /var/run/php; checkExit
+ln /usr/bin/php-cgi /usr/sbin/php-fpm
 
-echo "# WPLib: pecl update-channels."
+
+echo "# WPLib Box: pecl update-channels."
 # Fixup pecl errors.
 # EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
 #     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
-sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
+#sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
 pecl update-channels; checkExit
 
-#chown -fhR ${WPLIB_USER}:${WPLIB_USER} /build; checkExit
-#chgrp ${WPLIB_USER} /var/lib/pacman
-#chmod 775 /var/lib/pacman
-#su -c 'makepkg --force --log' ${WPLIB_USER}; checkExit
-#
-#echo "# WPLib: Packaging PHP ${PACKAGE_VERSION}."
-#pacman --upgrade --noconfirm --noprogressbar --color auto php-${PACKAGE_VERSION}*.pkg.tar.gz; checkExit
 
-echo "# WPLib: Adding Imagick extension."
-cd ${BUILDDIR}/ext; checkExit
+echo "# WPLib Box: Adding Imagick extension, (3.4.3)."
+cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/imagick-3.4.3.tgz; checkExit
 tar zxf imagick-3.4.3.tgz; checkExit
 cd imagick-3.4.3; checkExit
@@ -159,27 +194,14 @@ phpize; checkExit
 make; checkExit
 make install; checkExit
 
-echo "# WPLib: Adding Imagick extension."
-cd ${BUILDDIR}/ext; checkExit
-wget -nv https://xdebug.org/files/xdebug-2.5.5.tgz; checkExit
-tar zxf xdebug-2.5.5.tgz; checkExit
-cd xdebug-2.5.5; checkExit
+
+echo "# WPLib Box: Adding Xdebug extension, (2.6.0)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv https://xdebug.org/files/xdebug-2.6.0.tgz; checkExit
+tar zxf xdebug-2.6.0.tgz; checkExit
+cd xdebug-2.6.0; checkExit
 phpize; checkExit
 ./configure; checkExit
 make; checkExit
 make install; checkExit
-
-# find . -type f -perm +0111 -exec strip --strip-all '{}'
-
-echo "# WPLib: Removing build packages."
-apk del wplib.build; checkExit
-
-echo "# WPLib: Adding packages required by PHP ${PACKAGE_VERSION}."
-RUNTIME_DEPS="$(scanelf --needed --nobanner --format '%n#p' --recursive /usr | tr ',' '\n' | sort -u | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }')"
-echo "# ${RUNTIME_DEPS}"
-apk add --no-cache --virtual wplib.runtime ${RUNTIME_DEPS}; checkExit
-
-echo "# WPLib: Cleaning up."
-rm -rf /build
-unset BUILD_DEPS PERSIST_DEPS RUNTIME_DEPS CPPFLAGS LDFLAGS CFLAGS EXTENSION_DIR
 
