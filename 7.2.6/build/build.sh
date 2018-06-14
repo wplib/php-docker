@@ -173,14 +173,13 @@ make install; checkExit
 install -d -m755 /etc/php/conf.d/; checkExit
 rmdir /usr/include/php/include; checkExit
 mkdir -p /var/run/php; checkExit
-ln /usr/bin/php-cgi /usr/sbin/php-fpm
 
 
 echo "# WPLib Box: pecl update-channels."
 # Fixup pecl errors.
 # EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
 #     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
-#sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
+sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
 pecl update-channels; checkExit
 
 
