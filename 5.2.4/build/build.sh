@@ -7,7 +7,7 @@ checkExit()
 {
 	if [ "$?" != "0" ]
 	then
-		echo "# WPLib: Exit reason \"$@\""
+		echo "# WPLib Box: Exit reason \"$@\""
 		exit $?
 	fi
 }
@@ -15,7 +15,7 @@ checkExit()
 
 if [ ! -d /build ]
 then
-	echo "# WPLib: /build doesn't exist."
+	echo "# WPLib Box: /build doesn't exist."
 	exit
 fi
 
@@ -38,20 +38,20 @@ LDFLAGS="-Wl,-O1 -Wl,--hash-style=both -pie"; export LDFLAGS
 EXTENSION_DIR=/usr/lib/php/modules; export EXTENSION_DIR
 
 
-echo "# WPLib: Adding packages."
+echo "# WPLib Box: Adding packages."
 apk update; checkExit
 apk add --no-cache --virtual wplib.persist $PERSIST_DEPS; checkExit
 apk add --no-cache --virtual wplib.build $BUILD_DEPS; checkExit
 
 
-echo "# WPLib: Creating user accounts."
+echo "# WPLib Box: Creating user accounts."
 echo "%${WPLIB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 mkdir /var/mail; checkExit
 groupadd -g ${WPLIB_UID} ${WPLIB_USER}; checkExit
-useradd -d /home/${WPLIB_USER} -c "WPLib ${WPLIB_USER} user" -u ${WPLIB_UID} -g ${WPLIB_GID} -N -s /bin/bash ${WPLIB_USER}; checkExit
+useradd -d /home/${WPLIB_USER} -c "WPLib Box ${WPLIB_USER} user" -u ${WPLIB_UID} -g ${WPLIB_GID} -N -s /bin/bash ${WPLIB_USER}; checkExit
 
 
-echo "# WPLib: Fetching tarballs."
+echo "# WPLib Box: Fetching tarballs."
 cd /build; checkExit
 wget -nv -O "php-${PACKAGE_VERSION}.tar.gz" -nv "$PACKAGE_URL"; checkExit
 tar zxf php-${PACKAGE_VERSION}.tar.gz; checkExit
@@ -61,13 +61,13 @@ wget -nv ftp://ftp.gnu.org/gnu/bison/bison-2.3.tar.gz; checkExit
 tar zxf bison-2.3.tar.gz; checkExit
 
 
-echo "# WPLib: Configure Bison ${BISON_VERSION}."
+echo "# WPLib Box: Configure Bison ${BISON_VERSION}."
 cd ${BISONDIR}; checkExit
 ./configure --prefix=/usr; checkExit
 make install; checkExit
 
 
-echo "# WPLib: Configure MySQL ${MYSQL_VERSION}."
+echo "# WPLib Box: Configure MySQL ${MYSQL_VERSION}."
 cd ${BUILDDIR}; checkExit
 patch -p0 < mysql-5.1.72.patch
 cd ${MYSQLDIR}; checkExit
@@ -75,7 +75,7 @@ cd ${MYSQLDIR}; checkExit
 ln include/config.h include/my_config.h; checkExit
 
 
-echo "# WPLib: Build MySQL ${MYSQL_VERSION}."
+echo "# WPLib Box: Build MySQL ${MYSQL_VERSION}."
 cd ${MYSQLDIR}/libmysql; checkExit
 perl -p -i -e 's#pkglibdir = \$\(libdir\)/mysql#pkglibdir = \$(libdir)#g; s#pkgincludedir = \$\(includedir\)/mysql#pkgincludedir = \$(includedir)#g;' Makefile; checkExit
 make install; checkExit
@@ -87,7 +87,7 @@ cd ${MYSQLDIR}/scripts; checkExit
 make install; checkExit
 
 
-echo "# WPLib: Patching PHP ${PACKAGE_VERSION}."
+echo "# WPLib Box: Patching PHP ${PACKAGE_VERSION}."
 cd ${BUILDDIR}; checkExit
 patch -p0 < php-5.2.4-gmp.patch; checkExit
 patch -p0 < php-5.2.4-libxml29_compat.patch; checkExit
@@ -101,7 +101,7 @@ perl -p -i -e 's/HAVE_SYS_TIME_H/HAVE_SYS_TIME_H\n#define CLOCK_REALTIME 0/g' ph
 cp ${BUILDDIR}/config.cache ${PHPDIR}; checkExit
 
 
-echo "# WPLib: Configure PHP ${PACKAGE_VERSION}."
+echo "# WPLib Box: Configure PHP ${PACKAGE_VERSION}."
 cd ${PHPDIR}; checkExit
 
 # https://php-fpm.org/downloads/php-5.2.17-fpm-0.5.14.diff.gz
@@ -191,11 +191,11 @@ cd ${PHPDIR}; checkExit
 #	--enable-opcache
 
 
-echo "# WPLib: Compile PHP ${PACKAGE_VERSION}."
+echo "# WPLib Box: Compile PHP ${PACKAGE_VERSION}."
 make; checkExit
 
 
-echo "# WPLib: Install PHP ${PACKAGE_VERSION}."
+echo "# WPLib Box: Install PHP ${PACKAGE_VERSION}."
 make install; checkExit
 install -d -m755 /etc/php/conf.d/; checkExit
 rmdir /usr/include/php/include; checkExit
@@ -203,7 +203,7 @@ mkdir -p /var/run/php; checkExit
 ln /usr/bin/php-cgi /usr/sbin/php-fpm
 
 
-echo "# WPLib: pecl update-channels."
+echo "# WPLib Box: pecl update-channels."
 # Fixup pecl errors.
 # EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
 #     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
@@ -211,7 +211,7 @@ sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
 pecl update-channels; checkExit
 
 
-echo "# WPLib: Adding mbstring extension."
+echo "# WPLib Box: Adding mbstring extension."
 cd ${PHPDIR}/ext/mbstring; checkExit
 phpize; checkExit
 ./configure; checkExit
@@ -219,7 +219,7 @@ make; checkExit
 make install; checkExit
 
 
-echo "# WPLib: Adding Imagick extension, (3.4.3)."
+echo "# WPLib Box: Adding Imagick extension, (3.4.3)."
 cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/imagick-3.4.3.tgz; checkExit
 tar zxf imagick-3.4.3.tgz; checkExit
@@ -231,7 +231,7 @@ make; checkExit
 make install; checkExit
 
 
-echo "# WPLib: Adding Xdebug extension, (2.2.7)."
+echo "# WPLib Box: Adding Xdebug extension, (2.2.7)."
 cd ${PHPDIR}/ext; checkExit
 wget -nv https://xdebug.org/files/xdebug-2.2.7.tgz; checkExit
 tar zxf xdebug-2.2.7.tgz; checkExit
@@ -244,7 +244,7 @@ make install; checkExit
 
 # Produces this error:
 # Failed loading /usr/lib/php/modules/opcache.so:  Error relocating /usr/lib/php/modules/opcache.so: expand_filepath_ex: symbol not found
-#echo "# WPLib: Adding opcache extension, (7.0.4)."
+#echo "# WPLib Box: Adding opcache extension, (7.0.4)."
 #cd ${PHPDIR}/ext; checkExit
 #wget -nv https://pecl.php.net/get/zendopcache-7.0.4.tgz; checkExit
 #tar zxf zendopcache-7.0.4.tgz; checkExit
@@ -254,25 +254,3 @@ make install; checkExit
 #make; checkExit
 #make install; checkExit
 
-
-if [ "$DEBUG_ME" == "1" ]
-then
-	exit
-fi
-
-# find . -type f -perm +0111 -exec strip --strip-all '{}'
-
-echo "# WPLib: Removing build packages."
-apk del wplib.build; checkExit
-
-echo "# WPLib: Adding packages required by PHP ${PACKAGE_VERSION}."
-RUNTIME_DEPS="$(scanelf --needed --nobanner --format '%n#p' --recursive /usr | tr ',' '\n' | sort -u | awk '/libmysqlclient.so.16/{next} system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }')"
-echo "# ${RUNTIME_DEPS}"
-apk add --no-cache --virtual wplib.runtime ${RUNTIME_DEPS}; checkExit
-
-echo "# WPLib: Cleaning up."
-rm -rf ${BUILDDIR}
-unset BUILD_DEPS PERSIST_DEPS RUNTIME_DEPS CPPFLAGS LDFLAGS CFLAGS EXTENSION_DIR
-
-
-################################################################################
