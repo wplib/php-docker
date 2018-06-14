@@ -5,8 +5,8 @@ PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/
 phpinfo()
 PHP Version => 5.2.4
 
-System => Linux 3bb72af998b6 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
-Build Date => Jun 13 2018 07:17:12
+System => Linux 47cb89ff627f 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+Build Date => Jun 14 2018 01:50:53
 Configure Command =>  './configure'  '--prefix=/usr' '--sysconfdir=/etc/php' '--localstatedir=/var' '--with-layout=GNU' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--mandir=/usr/share/man' '--enable-inline-optimization' '--enable-fpm' '--enable-cgi' '--enable-fastcgi' '--enable-force-cgi-redirect' '--enable-cli' '--disable-debug' '--disable-rpath' '--disable-static' '--enable-shared' '--with-pic' '--without-mhash' '--with-pear' '--with-libedit' '--enable-bcmath=shared' '--with-bz2=shared' '--enable-calendar=shared' '--with-cdb' '--enable-ctype=shared' '--with-curl=shared' '--with-freetype-dir=shared,/usr' '--enable-ftp=shared' '--enable-exif=shared' '--with-gd=shared' '--enable-gd-native-ttf' '--with-png-dir=shared,/usr' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-imap=shared' '--with-jpeg-dir=shared,/usr' '--enable-json=shared' '--with-ldap=shared' '--enable-mbregex' '--enable-mbstring=all' '--with-mcrypt=shared' '--with-mysql=shared,/usr/bin/mysql_config' '--with-mysql-sock=/var/run/mysqld/mysqld.sock' '--with-mysqli=shared,/usr/bin/mysql_config' '--without-imap-ssl' '--without-openssl' '--with-pcre-regex=/usr' '--enable-pcntl=shared' '--enable-posix=shared' '--with-pspell=shared' '--with-regex=php' '--enable-session' '--enable-shmop=shared' '--with-snmp=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--with-unixODBC=shared,/usr' '--enable-dom=shared' '--enable-libxml=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--with-xmlrpc=shared' '--with-xsl=shared' '--enable-wddx=shared' '--enable-zip=shared' '--with-zlib=shared' '--enable-dba=shared' '--with-gdbm=shared' '--without-db4' '--without-db1' '--without-db2' '--without-db3' '--without-qdbm' '--without-mssql' '--enable-pdo=static' '--with-pdo-mysql=shared,/usr/bin/mysql_config' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--without-pdo-dblib' '--with-pgsql=shared'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
@@ -38,7 +38,8 @@ additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/xml.ini,
 /etc/php/conf.d/xmlreader.ini,
 /etc/php/conf.d/xmlrpc.ini,
-/etc/php/conf.d/zip.ini
+/etc/php/conf.d/zip.ini,
+/etc/php/conf.d/zlib.ini
 
 PHP API => 20041225
 PHP Extension => 20060613
@@ -47,9 +48,9 @@ Debug Build => no
 Thread Safety => disabled
 Zend Memory Manager => enabled
 IPv6 Support => enabled
-Registered PHP Streams => php, file, data, http, ftp, zip  
+Registered PHP Streams => php, file, data, http, ftp, zip, compress.zlib  
 Registered Stream Socket Transports => tcp, udp, unix, udg
-Registered Stream Filters => string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, convert.iconv.*
+Registered Stream Filters => string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, convert.iconv.*, zlib.*
 
 
 This program makes use of the Zend Scripting Language Engine:
@@ -520,6 +521,19 @@ Extension Version => $Id: php_zip.c,v 1.1.2.38 2007/08/06 22:02:32 bjori Exp $
 Zip version => 2.0.0
 Libzip version => 0.7.1
 
+zlib
+
+ZLib Support => enabled
+Stream Wrapper support => compress.zlib://
+Stream Filter support => zlib.inflate, zlib.deflate
+Compiled Version => 1.2.11
+Linked Version => 1.2.11
+
+Directive => Local Value => Master Value
+zlib.output_compression => Off => Off
+zlib.output_compression_level => -1 => -1
+zlib.output_handler => no value => no value
+
 Additional Modules
 
 Module Name
@@ -529,7 +543,7 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => 3bb72af998b6
+HOSTNAME => 47cb89ff627f
 TERM => xterm
 PACKAGE_VERSION => 5.2.4
 PACKAGE_URL => http://museum.php.net/php5/php-5.2.4.tar.gz
@@ -538,13 +552,13 @@ WPLIB_USER => vagrant
 WPLIB_UID => 1000
 WPLIB_GROUP => vagrant
 WPLIB_GID => 1000
-HOME => /home/vagrant
+HOME => /root
 
 PHP Variables
 
 Variable => Value
 _SERVER["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_SERVER["HOSTNAME"] => 3bb72af998b6
+_SERVER["HOSTNAME"] => 47cb89ff627f
 _SERVER["TERM"] => xterm
 _SERVER["PACKAGE_VERSION"] => 5.2.4
 _SERVER["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz
@@ -553,20 +567,20 @@ _SERVER["WPLIB_USER"] => vagrant
 _SERVER["WPLIB_UID"] => 1000
 _SERVER["WPLIB_GROUP"] => vagrant
 _SERVER["WPLIB_GID"] => 1000
-_SERVER["HOME"] => /home/vagrant
+_SERVER["HOME"] => /root
 _SERVER["PHP_SELF"] => 
 _SERVER["SCRIPT_NAME"] => 
 _SERVER["SCRIPT_FILENAME"] => 
 _SERVER["PATH_TRANSLATED"] => 
 _SERVER["DOCUMENT_ROOT"] => 
-_SERVER["REQUEST_TIME"] => 1528875238
+_SERVER["REQUEST_TIME"] => 1528942217
 _SERVER["argv"] => Array
 (
 )
 
 _SERVER["argc"] => 0
 _ENV["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_ENV["HOSTNAME"] => 3bb72af998b6
+_ENV["HOSTNAME"] => 47cb89ff627f
 _ENV["TERM"] => xterm
 _ENV["PACKAGE_VERSION"] => 5.2.4
 _ENV["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz
@@ -575,7 +589,7 @@ _ENV["WPLIB_USER"] => vagrant
 _ENV["WPLIB_UID"] => 1000
 _ENV["WPLIB_GROUP"] => vagrant
 _ENV["WPLIB_GID"] => 1000
-_ENV["HOME"] => /home/vagrant
+_ENV["HOME"] => /root
 
 PHP License
 This program is free software; you can redistribute it and/or modify
