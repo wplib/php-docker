@@ -1,0 +1,50 @@
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/mbstring.so' - Error loading shared library /usr/lib/php/modules/mbstring.so: No such file or directory in Unknown on line 0
+[PHP Modules]
+bcmath
+Core
+ctype
+curl
+date
+dom
+ereg
+exif
+fileinfo
+filter
+ftp
+gd
+gettext
+hash
+iconv
+imagick
+intl
+json
+libxml
+mbstring
+mcrypt
+mhash
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+pspell
+readline
+Reflection
+session
+SimpleXML
+sockets
+SPL
+standard
+tokenizer
+xdebug
+xml
+xmlreader
+xmlrpc
+xmlwriter
+Zend OPcache
+zip
+
+[Zend Modules]
+Xdebug
+Zend OPcache
+
