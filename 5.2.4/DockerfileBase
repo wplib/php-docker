@@ -12,6 +12,7 @@ ARG WPLIB_GID="1000"
 
 
 ################################################################################
+ENV BASE_BUILD $BASE_BUILD
 ENV PACKAGE_VERSION $PACKAGE_VERSION
 ENV PACKAGE_URL $PACKAGE_URL
 ENV PACKAGE_ROOT $PACKAGE_ROOT
