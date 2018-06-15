@@ -1,5 +1,6 @@
 #!/bin/sh
 
+BUILDDIR="/build"
 
 checkExit()
 {
@@ -15,6 +16,8 @@ then
 	echo "# WPLib Box: Maintaining build packages for build type \"$BUILD_TYPE\"."
 	exit
 fi
+
+find /usr/local/bin /usr/local/sbin -type f | xargs chmod a+x
 
 # find . -type f -perm +0111 -exec strip --strip-all '{}'
 
