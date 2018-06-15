@@ -1,10 +1,10 @@
 PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/mcrypt.so' - Error loading shared library /usr/lib/php/modules/mcrypt.so: No such file or directory in Unknown on line 0
 phpinfo()
-PHP Version => 7.1.18
+PHP Version => 7.0.30
 
-System => Linux 1596d9b186d4 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
-Build Date => Jun 15 2018 04:08:09
-Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-posix=shared' '--enable-session=shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-snmp=shared' '--with-sodium=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-readline'
+System => Linux d689bd17b891 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+Build Date => Jun 15 2018 05:05:01
+Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-posix=shared' '--enable-session=shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-snmp=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-readline'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
 Configuration File (php.ini) Path => /etc/php
@@ -39,14 +39,14 @@ Additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/xmlrpc.ini,
 /etc/php/conf.d/zip.ini
 
-PHP API => 20160303
-PHP Extension => 20160303
-Zend Extension => 320160303
-Zend Extension Build => API320160303,NTS
-PHP Extension Build => API20160303,NTS
+PHP API => 20151012
+PHP Extension => 20151012
+Zend Extension => 320151012
+Zend Extension Build => API320151012,NTS
+PHP Extension Build => API20151012,NTS
 Debug Build => no
 Thread Safety => disabled
-Zend Signal Handling => enabled
+Zend Signal Handling => disabled
 Zend Memory Manager => enabled
 Zend Multibyte Support => provided by mbstring
 IPv6 Support => enabled
@@ -57,8 +57,8 @@ Registered Stream Socket Transports => tcp, udp, unix, udg, ssl, tls, tlsv1.0, t
 Registered Stream Filters => zlib.*, string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, dechunk, convert.iconv.*
 
 This program makes use of the Zend Scripting Language Engine:
-Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.1.18, Copyright (c) 1999-2018, by Zend Technologies
+Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.0.30, Copyright (c) 1999-2017, by Zend Technologies
     with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
 
 
@@ -76,7 +76,7 @@ bcmath.scale => 0 => 0
 
 Core
 
-PHP Version => 7.1.18
+PHP Version => 7.0.30
 
 Directive => Local Value => Master Value
 allow_url_fopen => On => On
@@ -102,10 +102,10 @@ error_append_string => no value => no value
 error_log => no value => no value
 error_prepend_string => no value => no value
 error_reporting => 22527 => 22527
+exit_on_timeout => Off => Off
 expose_php => On => On
 extension_dir => /usr/lib/php/modules => /usr/lib/php/modules
 file_uploads => On => On
-hard_timeout => 2 => 2
 highlight.comment => <font style="color: #FF8000">#FF8000</font> => <font style="color: #FF8000">#FF8000</font>
 highlight.default => <font style="color: #0000BB">#0000BB</font> => <font style="color: #0000BB">#0000BB</font>
 highlight.html => <font style="color: #000000">#000000</font> => <font style="color: #000000">#000000</font>
@@ -165,7 +165,6 @@ zend.detect_unicode => On => On
 zend.enable_gc => On => On
 zend.multibyte => Off => Off
 zend.script_encoding => no value => no value
-zend.signal_check => Off => Off
 
 ctype
 
@@ -206,8 +205,8 @@ libSSH Version => libssh2/1.8.0
 date
 
 date/time support => enabled
-timelib version => 2016.05
-"Olson" Timezone Database Version => 2018.5
+timelib version => 2016.02
+"Olson" Timezone Database Version => 2017.3
 Timezone Database => internal
 Default timezone => UTC
 
@@ -232,7 +231,7 @@ RelaxNG Support => enabled
 exif
 
 EXIF Support => enabled
-EXIF Version => 7.1.18
+EXIF Version => 7.0.30
 Supported EXIF Version => 0220
 Supported filetypes => JPEG,TIFF
 
@@ -247,7 +246,7 @@ exif.encode_unicode => ISO-8859-15 => ISO-8859-15
 filter
 
 Input Validation and Filtering => enabled
-Revision => $Id: a4ca1e0a99c260cb8a4cf5d7369d130f7b934185 $
+Revision => $Id: 28fcca4bfda9c9907588a64d245b49cb398249d8 $
 
 Directive => Local Value => Master Value
 filter.default => unsafe_raw => unsafe_raw
@@ -278,7 +277,7 @@ XBM Support => enabled
 WebP Support => enabled
 
 Directive => Local Value => Master Value
-gd.jpeg_ignore_warning => 1 => 1
+gd.jpeg_ignore_warning => 0 => 0
 
 gettext
 
@@ -287,7 +286,7 @@ GetText Support => enabled
 hash
 
 hash support => enabled
-Hashing Engines => md2 md4 md5 sha1 sha224 sha256 sha384 sha512/224 sha512/256 sha512 sha3-224 sha3-256 sha3-384 sha3-512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b fnv132 fnv1a32 fnv164 fnv1a64 joaat haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5 
+Hashing Engines => md2 md4 md5 sha1 sha224 sha256 sha384 sha512 ripemd128 ripemd160 ripemd256 ripemd320 whirlpool tiger128,3 tiger160,3 tiger192,3 tiger128,4 tiger160,4 tiger192,4 snefru snefru256 gost gost-crypto adler32 crc32 crc32b fnv132 fnv1a32 fnv164 fnv1a64 joaat haval128,3 haval160,3 haval192,3 haval224,3 haval256,3 haval128,4 haval160,4 haval192,4 haval224,4 haval256,4 haval128,5 haval160,5 haval192,5 haval224,5 haval256,5 
 
 iconv
 
@@ -332,7 +331,7 @@ intl.use_exceptions => 0 => 0
 json
 
 json support => enabled
-json version => 1.5.0
+json version => 1.4.0
 
 libxml
 
@@ -367,10 +366,31 @@ mbstring.language => neutral => neutral
 mbstring.strict_detection => Off => Off
 mbstring.substitute_character => no value => no value
 
+mysqli
+
+MysqlI Support => enabled
+Client API library version => mysqlnd 5.0.12-dev - 20150407 - $Id: b5c5906d452ec590732a93b051f3827e02749b83 $
+Active Persistent Links => 0
+Inactive Persistent Links => 0
+Active Links => 0
+
+Directive => Local Value => Master Value
+mysqli.allow_local_infile => On => On
+mysqli.allow_persistent => On => On
+mysqli.default_host => no value => no value
+mysqli.default_port => 3306 => 3306
+mysqli.default_pw => no value => no value
+mysqli.default_socket => /run/mysqld/mysqld.sock => /run/mysqld/mysqld.sock
+mysqli.default_user => no value => no value
+mysqli.max_links => Unlimited => Unlimited
+mysqli.max_persistent => Unlimited => Unlimited
+mysqli.reconnect => Off => Off
+mysqli.rollback_on_cached_plink => Off => Off
+
 mysqlnd
 
 mysqlnd => enabled
-Version => mysqlnd 5.0.12-dev - 20150407 - $Id: 38fea24f2847fa7519001be390c98ae0acafe387 $
+Version => mysqlnd 5.0.12-dev - 20150407 - $Id: b5c5906d452ec590732a93b051f3827e02749b83 $
 Compression => supported
 core SSL => supported
 extended SSL => supported
@@ -381,7 +401,7 @@ Collecting statistics => Yes
 Collecting memory statistics => No
 Tracing => n/a
 Loaded plugins => mysqlnd,debug_trace,auth_plugin_mysql_native_password,auth_plugin_mysql_clear_password,auth_plugin_sha256_password
-API Extensions =>  
+API Extensions => mysqli
 
 mysqlnd statistics =>  
 bytes_sent => 0
@@ -467,10 +487,8 @@ mem_free_count => 0
 mem_free_amount => 0
 mem_estrndup_count => 0
 mem_strndup_count => 0
-mem_estrdup_count => 0
+mem_estndup_count => 0
 mem_strdup_count => 0
-mem_edupl_count => 0
-mem_dupl_count => 0
 proto_text_fetched_null => 0
 proto_text_fetched_bit => 0
 proto_text_fetched_tinyint => 0
@@ -590,7 +608,7 @@ cli.prompt => \b \>  => \b \>
 Reflection
 
 Reflection => enabled
-Version => $Id: 7c6e20c07e8435a5148263b349668853c0057575 $
+Version => $Id: e5303663dcb329e17818853ff223e5ee01481f2c $
 
 session
 
@@ -607,17 +625,19 @@ session.cookie_httponly => Off => Off
 session.cookie_lifetime => 0 => 0
 session.cookie_path => / => /
 session.cookie_secure => Off => Off
+session.entropy_file => /dev/urandom => /dev/urandom
+session.entropy_length => 32 => 32
 session.gc_divisor => 1000 => 1000
 session.gc_maxlifetime => 1440 => 1440
 session.gc_probability => 1 => 1
+session.hash_bits_per_character => 5 => 5
+session.hash_function => 0 => 0
 session.lazy_write => On => On
 session.name => PHPSESSID => PHPSESSID
 session.referer_check => no value => no value
 session.save_handler => files => files
 session.save_path => no value => no value
 session.serialize_handler => php => php
-session.sid_bits_per_character => 4 => 4
-session.sid_length => 32 => 32
 session.upload_progress.cleanup => On => On
 session.upload_progress.enabled => On => On
 session.upload_progress.freq => 1% => 1%
@@ -654,9 +674,6 @@ assert.warning => 1 => 1
 auto_detect_line_endings => 0 => 0
 default_socket_timeout => 60 => 60
 from => no value => no value
-session.trans_sid_hosts => no value => no value
-session.trans_sid_tags => a=href,area=href,frame=src,form= => a=href,area=href,frame=src,form=
-url_rewriter.hosts => no value => no value
 url_rewriter.tags => a=href,area=href,frame=src,input=src,form=fakeentry => a=href,area=href,frame=src,input=src,form=fakeentry
 user_agent => no value => no value
 
@@ -749,7 +766,7 @@ XMLReader => enabled
 xmlrpc
 
 core library version => xmlrpc-epi v. 0.51
-php extension version => 7.1.18
+php extension version => 7.0.30
 author => Dan Libby
 homepage => http://xmlrpc-epi.sourceforge.net
 open sourced by => Epinions.com
@@ -778,14 +795,13 @@ opcache.file_update_protection => 2 => 2
 opcache.force_restart_timeout => 180 => 180
 opcache.huge_code_pages => Off => Off
 opcache.inherited_hack => On => On
-opcache.interned_strings_buffer => 8 => 8
+opcache.interned_strings_buffer => 4 => 4
 opcache.lockfile_path => /tmp => /tmp
 opcache.log_verbosity_level => 1 => 1
-opcache.max_accelerated_files => 10000 => 10000
+opcache.max_accelerated_files => 2000 => 2000
 opcache.max_file_size => 0 => 0
 opcache.max_wasted_percentage => 5 => 5
-opcache.memory_consumption => 128 => 128
-opcache.opt_debug_level => 0 => 0
+opcache.memory_consumption => 64 => 64
 opcache.optimization_level => 0x7FFFBFFF => 0x7FFFBFFF
 opcache.preferred_memory_model => no value => no value
 opcache.protect_memory => 0 => 0
@@ -825,10 +841,10 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => 1596d9b186d4
+HOSTNAME => d689bd17b891
 TERM => xterm
-PACKAGE_VERSION => 7.1.18
-PACKAGE_URL => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+PACKAGE_VERSION => 7.0.30
+PACKAGE_URL => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror
 PACKAGE_ROOT => /
 WPLIB_USER => vagrant
 WPLIB_UID => 1000
@@ -840,10 +856,10 @@ PHP Variables
 
 Variable => Value
 $_SERVER['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_SERVER['HOSTNAME'] => 1596d9b186d4
+$_SERVER['HOSTNAME'] => d689bd17b891
 $_SERVER['TERM'] => xterm
-$_SERVER['PACKAGE_VERSION'] => 7.1.18
-$_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+$_SERVER['PACKAGE_VERSION'] => 7.0.30
+$_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror
 $_SERVER['PACKAGE_ROOT'] => /
 $_SERVER['WPLIB_USER'] => vagrant
 $_SERVER['WPLIB_UID'] => 1000
@@ -855,18 +871,18 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1529036095.2487
-$_SERVER['REQUEST_TIME'] => 1529036095
+$_SERVER['REQUEST_TIME_FLOAT'] => 1529051131.9207
+$_SERVER['REQUEST_TIME'] => 1529051131
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
 $_ENV['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_ENV['HOSTNAME'] => 1596d9b186d4
+$_ENV['HOSTNAME'] => d689bd17b891
 $_ENV['TERM'] => xterm
-$_ENV['PACKAGE_VERSION'] => 7.1.18
-$_ENV['PACKAGE_URL'] => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+$_ENV['PACKAGE_VERSION'] => 7.0.30
+$_ENV['PACKAGE_URL'] => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror
 $_ENV['PACKAGE_ROOT'] => /
 $_ENV['WPLIB_USER'] => vagrant
 $_ENV['WPLIB_UID'] => 1000

@@ -18,6 +18,7 @@ intl
 json
 libxml
 mbstring
+mysqli
 mysqlnd
 openssl
 pcntl
