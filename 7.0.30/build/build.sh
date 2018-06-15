@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # ssh-keygen -A
+BUILDDIR="/build"
 
 
 checkExit()
@@ -13,9 +14,9 @@ checkExit()
 }
 
 
-if [ ! -d /build ]
+if [ ! -d ${BUILDDIR} ]
 then
-	echo "# WPLib Box: /build doesn't exist."
+	echo "# WPLib Box: ${BUILDDIR} doesn't exist."
 	exit
 fi
 
@@ -27,12 +28,7 @@ BUILD_DEPS="${BUILD_BINS} ${BUILD_LIBS}"
 
 PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar xz"
 
-BUILDDIR="/build"
 PHPDIR="${BUILDDIR}/php-${PACKAGE_VERSION}"
-MYSQL_VERSION="5.1.72"
-MYSQLDIR="${BUILDDIR}/mysql-${MYSQL_VERSION}"
-BISON_VERSION="2.3"
-BISONDIR="${BUILDDIR}/bison-${BISON_VERSION}"
 
 CFLAGS="-fstack-protector-strong -fpic -fpie -O2"; export CFLAGS
 CPPFLAGS="$CFLAGS"; export CPPFLAGS

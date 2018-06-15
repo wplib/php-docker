@@ -31,5 +31,5 @@ echo "# WPLib Box: Cleaning up."
 rm -rf ${BUILDDIR}
 unset BUILD_DEPS PERSIST_DEPS RUNTIME_DEPS CPPFLAGS LDFLAGS CFLAGS EXTENSION_DIR
 
-apk add alpine-baselayout alpine-keys apk-tools libc-utils bash less
+# apk add alpine-baselayout alpine-keys apk-tools libc-utils bash less
 
