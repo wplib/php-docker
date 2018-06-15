@@ -6,6 +6,8 @@ then
 	exit
 fi
 
+find /usr/local/bin /usr/local/sbin -type f | xargs chmod a+x
+
 # find . -type f -perm +0111 -exec strip --strip-all '{}'
 
 echo "# WPLib Box: Removing build packages for runtime."
