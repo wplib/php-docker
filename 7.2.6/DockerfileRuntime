@@ -33,9 +33,11 @@ RUN	/bin/sh /build/build.sh && \
 	mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail && \
 	/bin/sh /build/cleanup.sh
 
+COPY files /
+
 #	cd / && tar xf /tmp/tarball
 
 WORKDIR /var/www
 # USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
-CMD ["/usr/sbin/php-fpm", "-x"]
+CMD ["/usr/sbin/php-fpm", "-F"]

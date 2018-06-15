@@ -30,7 +30,9 @@ COPY tarball /tmp
 
 RUN	cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball
 
+COPY files /
+
 WORKDIR /var/www
 # USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
-CMD ["/usr/sbin/php-fpm", "-x"]
+CMD ["/usr/sbin/php-fpm", "-F"]

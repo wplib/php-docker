@@ -1,10 +1,10 @@
 FROM alpine:3.7
-# FROM wplib/php-base:7.2.6
+# FROM wplib/php-base:7.0.30
 
 MAINTAINER WPLib Team <team@wplib.org>
 
-ARG PACKAGE_VERSION="7.2.6"
-ARG PACKAGE_URL="http://php.net/get/php-7.2.6.tar.gz/from/this/mirror"
+ARG PACKAGE_VERSION="7.0.30"
+ARG PACKAGE_URL="http://php.net/get/php-7.0.30.tar.gz/from/this/mirror"
 ARG PACKAGE_ROOT="/"
 ARG WPLIB_USER="vagrant"
 ARG WPLIB_UID="1000"
@@ -30,7 +30,9 @@ COPY tarball /tmp
 
 RUN	cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball
 
+COPY files /
+
 WORKDIR /var/www
 # USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
-CMD ["/usr/sbin/php-fpm", "-x"]
+CMD ["/usr/sbin/php-fpm", "-F"]
