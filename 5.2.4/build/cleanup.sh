@@ -1,5 +1,15 @@
 #!/bin/sh
 
+
+checkExit()
+{
+	if [ "$?" != "0" ]
+	then
+		echo "# WPLib Box: Exit reason \"$@\""
+		exit $?
+	fi
+}
+
 if [ "$BUILD_TYPE" != "" ]
 then
 	echo "# WPLib Box: Maintaining build packages for build type \"$BUILD_TYPE\"."
