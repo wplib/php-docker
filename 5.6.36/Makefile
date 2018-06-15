@@ -45,9 +45,6 @@ RESTART		:= $(call GetFromPkg,restart)
 ARGS		:= $(call GetFromPkg,args)
 ENV		:= $(call GetFromPkg,env)
 
-
-LOGFILE := $(shell date +'build-%Y%m%d-%H%M%S.log')
-
 ifeq ($(BUILD_TYPE),)
 DOCKERFILE	:= DockerfileRuntime
 BUILD_ARGS	:= --squash
@@ -61,6 +58,10 @@ endif
 IMAGE_NAME	?= $(PROJECT)/$(NAME)
 CONTAINER_NAME	?= $(NAME)-$(VERSION)
 CONTAINER_JSON	?= '$(call rawJSON)'
+
+
+LOGFILE := $(NAME)-$(shell date +'%Y%m%d-%H%M%S').log
+
 
 .PHONY: build push release clean list inspect test create shell run start stop rm
 
@@ -82,6 +83,9 @@ ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
 	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f $(DOCKERFILE) .
+	# -docker run --rm -it -v `pwd`:/tmp $(IMAGE_NAME):$(VERSION) tar cf /tmp/tarball --exclude=/etc/hostname --exclude=/etc/hosts --exclude=/etc/resolv.conf /bin /etc /home /lib /media /mnt /root /sbin /usr /var
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
 	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
