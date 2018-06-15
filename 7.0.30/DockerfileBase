@@ -32,6 +32,6 @@ RUN	/bin/sh /build/build.sh && \
 	chmod a+x /usr/local/bin/*
 
 WORKDIR /var/www
-USER vagrant
+# USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
 CMD ["/usr/sbin/php-fpm", "-F"]
