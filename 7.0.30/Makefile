@@ -71,15 +71,22 @@ LOGFILE := $(NAME)-$(shell date +'%Y%m%d-%H%M%S').log
 default: all
 
 all:
-	@echo "clean-base - Clean base container image."
-	@echo "build-base - Build base container image."
-	@echo "info - Generate PHP info from runtime container image."
-	@echo "tarball - Generate runtime image from base container image."
-	@echo "build - Generate runtime image."
+	@echo "clean-base	- Clean base container image."
+	@echo "build-base	- Build base container image."
+	@echo "info		- Generate PHP info from runtime container image."
+	@echo "build		- Generate runtime image from base container image."
+	@echo "clean		- Clean runtime image."
+	@echo "build-full	- Generate runtime image without base reference."
+	@echo ""
+	@echo "Process:"
+	@echo "	make clean-base"
+	@echo "	make build-base"
+	@echo "	make clean"
+	@echo "	make build"
 
 
 build-base: $(DOCKERFILE)
-	@make build BUILD_TYPE="base"
+	@make build-full BUILD_TYPE="base"
 
 
 clean-base: $(DOCKERFILE)
@@ -95,7 +102,7 @@ else
 endif
 
 
-tarball: DockerfileTarball
+build: DockerfileTarball
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
@@ -109,7 +116,7 @@ endif
 endif
 
 
-build: $(DOCKERFILE)
+build-full: $(DOCKERFILE)
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
@@ -146,6 +153,7 @@ clean:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
+	rm php-base-info.txt php-base-modules.txt php-info.txt php-modules.txt tarball
 	docker image rm $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
 	-docker image rm $(IMAGE_NAME):$(MAJORVERSION)
