@@ -29,10 +29,6 @@ PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar 
 
 BUILDDIR="/build"
 PHPDIR="${BUILDDIR}/php-${PACKAGE_VERSION}"
-MYSQL_VERSION="5.1.72"
-MYSQLDIR="${BUILDDIR}/mysql-${MYSQL_VERSION}"
-BISON_VERSION="2.3"
-BISONDIR="${BUILDDIR}/bison-${BISON_VERSION}"
 
 CFLAGS="-fstack-protector-strong -fpic -fpie -O2"; export CFLAGS
 CPPFLAGS="$CFLAGS"; export CPPFLAGS
