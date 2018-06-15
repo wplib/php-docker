@@ -1,0 +1,36 @@
+FROM alpine:3.7
+# FROM wplib/php-base:7.2.6
+
+MAINTAINER WPLib Team <team@wplib.org>
+
+ARG PACKAGE_VERSION="7.2.6"
+ARG PACKAGE_URL="http://php.net/get/php-7.2.6.tar.gz/from/this/mirror"
+ARG PACKAGE_ROOT="/"
+ARG WPLIB_USER="vagrant"
+ARG WPLIB_UID="1000"
+ARG WPLIB_GROUP="vagrant"
+ARG WPLIB_GID="1000"
+
+
+################################################################################
+ENV PACKAGE_VERSION $PACKAGE_VERSION
+ENV PACKAGE_URL $PACKAGE_URL
+ENV PACKAGE_ROOT $PACKAGE_ROOT
+ENV WPLIB_USER $WPLIB_USER
+ENV WPLIB_UID $WPLIB_UID
+ENV WPLIB_GROUP $WPLIB_GROUP
+ENV WPLIB_GID $WPLIB_GID
+
+USER root
+
+COPY build/* /build/
+COPY container.json /etc/container.json
+COPY files /
+COPY tarball /tmp
+
+RUN	cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball
+
+WORKDIR /var/www
+# USER vagrant
+# ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
+CMD ["/usr/sbin/php-fpm", "-x"]

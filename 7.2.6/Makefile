@@ -45,6 +45,7 @@ RESTART		:= $(call GetFromPkg,restart)
 ARGS		:= $(call GetFromPkg,args)
 ENV		:= $(call GetFromPkg,env)
 
+OLDNAME		:= $(NAME)
 ifeq ($(BUILD_TYPE),)
 DOCKERFILE	:= DockerfileRuntime
 BUILD_ARGS	:= --squash
@@ -67,7 +68,14 @@ LOGFILE := $(NAME)-$(shell date +'%Y%m%d-%H%M%S').log
 
 ################################################################################
 # Image related commands.
-default: build
+default: all
+
+all:
+	@echo "clean-base - Clean base container image."
+	@echo "build-base - Build base container image."
+	@echo "info - Generate PHP info from runtime container image."
+	@echo "tarball - Generate runtime image from base container image."
+	@echo "build - Generate runtime image."
 
 
 build-base: $(DOCKERFILE)
@@ -78,19 +86,38 @@ clean-base: $(DOCKERFILE)
 	@make clean BUILD_TYPE="base"
 
 
-build: $(DOCKERFILE)
+info:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f $(DOCKERFILE) .
-	# -docker run --rm -it -v `pwd`:/tmp $(IMAGE_NAME):$(VERSION) tar cf /tmp/tarball --exclude=/etc/hostname --exclude=/etc/hosts --exclude=/etc/resolv.conf /bin /etc /home /lib /media /mnt /root /sbin /usr /var
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
+endif
+
+
+tarball: DockerfileTarball
+ifeq ($(PROJECT),)
+	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
+else
+	docker run --rm -it -v `pwd`:/tmp $(PROJECT)/$(NAME)-base:$(VERSION) tar cf /tmp/tarball --exclude=/build --exclude=/etc/hostname --exclude=/etc/hosts --exclude=/etc/resolv.conf /bin /etc /home /lib /media /mnt /root /sbin /usr /var
+	-docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f DockerfileTarball .
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
 	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
-ifeq ($(LATEST),1)
-	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):latest
+endif
+
+
+build: $(DOCKERFILE)
+ifeq ($(PROJECT),)
+	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
+else
+	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f $(DOCKERFILE) .
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
+ifneq ($(MAJORVERSION),)
+	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
 	@echo "WPLib: Log file saved to \"logs/$(LOGFILE)\""
 endif
@@ -102,9 +129,6 @@ else
 	docker push $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
 	-docker push $(IMAGE_NAME):$(MAJORVERSION)
-endif
-ifeq ($(LATEST),1)
-	-docker push $(IMAGE_NAME):latest
 endif
 endif
 
@@ -126,9 +150,6 @@ else
 ifneq ($(MAJORVERSION),)
 	-docker image rm $(IMAGE_NAME):$(MAJORVERSION)
 endif
-ifeq ($(LATEST),1)
-	-docker image rm $(IMAGE_NAME):latest
-endif
 endif
 
 
@@ -139,9 +160,6 @@ else
 	docker image ls $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
 	-docker image ls $(IMAGE_NAME):$(MAJORVERSION)
-endif
-ifeq ($(LATEST),1)
-	-docker image ls $(IMAGE_NAME):latest
 endif
 endif
 
