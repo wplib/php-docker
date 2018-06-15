@@ -1,0 +1,43 @@
+PHP Warning:  PHP Startup: Unable to load dynamic library 'mcrypt.so' (tried: /usr/lib/php/modules/mcrypt.so (Error loading shared library /usr/lib/php/modules/mcrypt.so: No such file or directory), /usr/lib/php/modules/mcrypt.so.so (Error loading shared library /usr/lib/php/modules/mcrypt.so.so: No such file or directory)) in Unknown on line 0
+[PHP Modules]
+bcmath
+Core
+ctype
+curl
+date
+dom
+exif
+filter
+ftp
+gd
+gettext
+hash
+iconv
+imagick
+intl
+json
+libxml
+mbstring
+mysqlnd
+openssl
+pcntl
+pcre
+pspell
+readline
+Reflection
+session
+sockets
+SPL
+standard
+xdebug
+xml
+xmlreader
+xmlrpc
+Zend OPcache
+zip
+zlib
+
+[Zend Modules]
+Xdebug
+Zend OPcache
+
