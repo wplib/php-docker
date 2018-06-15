@@ -2,7 +2,7 @@ PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/
 phpinfo()
 PHP Version => 7.1.18
 
-System => Linux f20b18374ad3 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+System => Linux edbd903598aa 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
 Build Date => Jun 14 2018 09:35:40
 Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-posix=shared' '--enable-session=shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-snmp=shared' '--with-sodium=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-readline'
 Server API => Command Line Interface
@@ -24,6 +24,7 @@ Additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/json.ini,
 /etc/php/conf.d/mbstring.ini,
 /etc/php/conf.d/mcrypt.ini,
+/etc/php/conf.d/mysqli.ini,
 /etc/php/conf.d/mysqlnd.ini,
 /etc/php/conf.d/opcache.ini,
 /etc/php/conf.d/openssl.ini,
@@ -308,8 +309,7 @@ Imagick compiled with ImageMagick version => ImageMagick 7.0.7-11 Q16 x86_64 201
 Imagick using ImageMagick library version => ImageMagick 7.0.7-11 Q16 x86_64 2017-11-15 http://www.imagemagick.org
 ImageMagick copyright => © 1999-2017 ImageMagick Studio LLC
 ImageMagick release date => 2017-11-15
-ImageMagick number of supported formats:  => 220
-ImageMagick supported formats => 3FR, 3G2, 3GP, AAI, AI, ART, ARW, AVI, AVS, BGR, BGRA, BGRO, BMP, BMP2, BMP3, BRF, CAL, CALS, CANVAS, CAPTION, CIN, CIP, CLIP, CMYK, CMYKA, CR2, CRW, CUR, CUT, DCM, DCR, DCX, DDS, DFONT, DNG, DOT, DPX, DXT1, DXT5, EPDF, EPI, EPS, EPS2, EPS3, EPSF, EPSI, EPT, EPT2, EPT3, ERF, FAX, FILE, FITS, FRACTAL, FTP, FTS, G3, G4, GIF, GIF87, GRADIENT, GRAY, GROUP4, GV, HALD, HDR, HISTOGRAM, HRZ, HTM, HTML, HTTP, HTTPS, ICB, ICO, ICON, IIQ, INFO, INLINE, IPL, ISOBRL, ISOBRL6, JNG, JNX, JPE, JPEG, JPG, JPS, JSON, K25, KDC, LABEL, M2V, M4V, MAC, MAP, MASK, MAT, MATTE, MEF, MIFF, MKV, MNG, MONO, MOV, MP4, MPC, MPEG, MPG, MRW, MSL, MSVG, MTV, MVG, NEF, NRW, NULL, ORF, OTB, OTF, PAL, PALM, PAM, PANGO, PATTERN, PBM, PCD, PCDS, PCL, PCT, PCX, PDB, PDF, PDFA, PEF, PES, PFA, PFB, PFM, PGM, PICON, PICT, PIX, PJPEG, PLASMA, PNG, PNG00, PNG24, PNG32, PNG48, PNG64, PNG8, PNM, PPM, PS, PS2, PS3, PSB, PSD, PTIF, PWP, RADIAL-GRADIENT, RAF, RAS, RAW, RGB, RGBA, RGBO, RGF, RLA, RLE, RMF, RW2, SCR, SCT, SFW, SGI, SHTML, SIX, SIXEL, SPARSE-COLOR, SR2, SRF, STEGANO, SUN, SVG, SVGZ, TEXT, TGA, THUMBNAIL, TIFF, TIFF64, TILE, TIM, TTC, TTF, TXT, UBRL, UBRL6, UIL, UYVY, VDA, VICAR, VID, VIFF, VIPS, VST, WBMP, WEBP, WMV, WPG, X3F, XBM, XC, XCF, XPM, XPS, XV, YCbCr, YCbCrA, YUV
+ImageMagick number of supported formats:  => 0
 
 Directive => Local Value => Master Value
 imagick.locale_fix => 0 => 0
@@ -824,10 +824,10 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => f20b18374ad3
+HOSTNAME => edbd903598aa
 TERM => xterm
-PACKAGE_VERSION => 7.1.18
-PACKAGE_URL => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+PACKAGE_VERSION => 7.2.6
+PACKAGE_URL => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
 PACKAGE_ROOT => /
 WPLIB_USER => vagrant
 WPLIB_UID => 1000
@@ -839,10 +839,10 @@ PHP Variables
 
 Variable => Value
 $_SERVER['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_SERVER['HOSTNAME'] => f20b18374ad3
+$_SERVER['HOSTNAME'] => edbd903598aa
 $_SERVER['TERM'] => xterm
-$_SERVER['PACKAGE_VERSION'] => 7.1.18
-$_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+$_SERVER['PACKAGE_VERSION'] => 7.2.6
+$_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
 $_SERVER['PACKAGE_ROOT'] => /
 $_SERVER['WPLIB_USER'] => vagrant
 $_SERVER['WPLIB_UID'] => 1000
@@ -854,18 +854,18 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1528983614.2147
-$_SERVER['REQUEST_TIME'] => 1528983614
+$_SERVER['REQUEST_TIME_FLOAT'] => 1529031086.6785
+$_SERVER['REQUEST_TIME'] => 1529031086
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
 $_ENV['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_ENV['HOSTNAME'] => f20b18374ad3
+$_ENV['HOSTNAME'] => edbd903598aa
 $_ENV['TERM'] => xterm
-$_ENV['PACKAGE_VERSION'] => 7.1.18
-$_ENV['PACKAGE_URL'] => http://php.net/get/php-7.1.18.tar.gz/from/this/mirror
+$_ENV['PACKAGE_VERSION'] => 7.2.6
+$_ENV['PACKAGE_URL'] => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
 $_ENV['PACKAGE_ROOT'] => /
 $_ENV['WPLIB_USER'] => vagrant
 $_ENV['WPLIB_UID'] => 1000
