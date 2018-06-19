@@ -1,7 +1,7 @@
 phpinfo()
 PHP Version => 7.0.30
 
-System => Linux dd489aa689ab 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+System => Linux fe7895fcc2c1 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
 Build Date => Jun 19 2018 01:42:08
 Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-posix=shared' '--enable-session=shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-snmp=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-readline'
 Server API => Command Line Interface
@@ -883,7 +883,7 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => dd489aa689ab
+HOSTNAME => fe7895fcc2c1
 TERM => xterm
 PACKAGE_VERSION => 7.0.30
 PACKAGE_URL => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror
@@ -898,7 +898,7 @@ PHP Variables
 
 Variable => Value
 $_SERVER['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_SERVER['HOSTNAME'] => dd489aa689ab
+$_SERVER['HOSTNAME'] => fe7895fcc2c1
 $_SERVER['TERM'] => xterm
 $_SERVER['PACKAGE_VERSION'] => 7.0.30
 $_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror
@@ -913,15 +913,15 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1529373115.4578
-$_SERVER['REQUEST_TIME'] => 1529373115
+$_SERVER['REQUEST_TIME_FLOAT'] => 1529372938.491
+$_SERVER['REQUEST_TIME'] => 1529372938
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
 $_ENV['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_ENV['HOSTNAME'] => dd489aa689ab
+$_ENV['HOSTNAME'] => fe7895fcc2c1
 $_ENV['TERM'] => xterm
 $_ENV['PACKAGE_VERSION'] => 7.0.30
 $_ENV['PACKAGE_URL'] => http://php.net/get/php-7.0.30.tar.gz/from/this/mirror

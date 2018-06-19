@@ -1,13 +1,17 @@
 Failed loading /usr/lib/php/modules/opcache.so:  Error loading shared library /usr/lib/php/modules/opcache.so: No such file or directory
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/fileinfo.so' - Error loading shared library /usr/lib/php/modules/fileinfo.so: No such file or directory in Unknown on line 0
 PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/intl.so' - Error loading shared library /usr/lib/php/modules/intl.so: No such file or directory in Unknown on line 0
-PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'mbstring.so'  in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/mysqlnd.so' - Error loading shared library /usr/lib/php/modules/mysqlnd.so: No such file or directory in Unknown on line 0
+PHP Warning:  Module 'mysqli' already loaded in Unknown on line 0
 PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/openssl.so' - Error loading shared library /usr/lib/php/modules/openssl.so: No such file or directory in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/sodium.so' - Error loading shared library /usr/lib/php/modules/sodium.so: No such file or directory in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/modules/zlib.so' - Error loading shared library /usr/lib/php/modules/zlib.so: No such file or directory in Unknown on line 0
 phpinfo()
 PHP Version => 5.2.4
 
-System => Linux 47cb89ff627f 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
-Build Date => Jun 14 2018 01:50:53
-Configure Command =>  './configure'  '--prefix=/usr' '--sysconfdir=/etc/php' '--localstatedir=/var' '--with-layout=GNU' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--mandir=/usr/share/man' '--enable-inline-optimization' '--enable-fpm' '--enable-cgi' '--enable-fastcgi' '--enable-force-cgi-redirect' '--enable-cli' '--disable-debug' '--disable-rpath' '--disable-static' '--enable-shared' '--with-pic' '--without-mhash' '--with-pear' '--with-libedit' '--enable-bcmath=shared' '--with-bz2=shared' '--enable-calendar=shared' '--with-cdb' '--enable-ctype=shared' '--with-curl=shared' '--with-freetype-dir=shared,/usr' '--enable-ftp=shared' '--enable-exif=shared' '--with-gd=shared' '--enable-gd-native-ttf' '--with-png-dir=shared,/usr' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-imap=shared' '--with-jpeg-dir=shared,/usr' '--enable-json=shared' '--with-ldap=shared' '--enable-mbregex' '--enable-mbstring=all' '--with-mcrypt=shared' '--with-mysql=shared,/usr/bin/mysql_config' '--with-mysql-sock=/var/run/mysqld/mysqld.sock' '--with-mysqli=shared,/usr/bin/mysql_config' '--without-imap-ssl' '--without-openssl' '--with-pcre-regex=/usr' '--enable-pcntl=shared' '--enable-posix=shared' '--with-pspell=shared' '--with-regex=php' '--enable-session' '--enable-shmop=shared' '--with-snmp=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--with-unixODBC=shared,/usr' '--enable-dom=shared' '--enable-libxml=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--with-xmlrpc=shared' '--with-xsl=shared' '--enable-wddx=shared' '--enable-zip=shared' '--with-zlib=shared' '--enable-dba=shared' '--with-gdbm=shared' '--without-db4' '--without-db1' '--without-db2' '--without-db3' '--without-qdbm' '--without-mssql' '--enable-pdo=static' '--with-pdo-mysql=shared,/usr/bin/mysql_config' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--without-pdo-dblib' '--with-pgsql=shared'
+System => Linux 2f673499aa65 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+Build Date => Jun 19 2018 04:13:29
+Configure Command =>  './configure'  '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-debug' '--disable-gd-jis-conv' '--disable-rpath' '--disable-short-tags' '--disable-static' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-cgi' '--enable-cli' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fastcgi' '--enable-fileinfo=shared' '--enable-force-cgi-redirect' '--enable-ftp=shared' '--enable-gd-native-ttf' '--enable-inline-optimization' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbregex=shared' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-option-checking=fatal' '--enable-pcntl=shared' '--enable-pdo' '--enable-phar=shared' '--enable-phpdbg' '--enable-posix=shared' '--enable-session=shared' '--enable-shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--mandir=/usr/share/man' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--without-cdb' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--without-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--without-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--without-ldap-sasl' '--without-ldap' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mcrypt=shared' '--with-mhash=shared' '--with-mssql=shared' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysql=shared,/usr/bin/mysql_config' '--with-mysqli=shared,/usr/bin/mysql_config' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,/usr/bin/mysql_config' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--without-recode' '--with-readline' '--with-regex=php' '--with-snmp=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-db1' '--without-db2' '--without-db3' '--without-imap-ssl' '--without-mhash' '--without-mssql' '--without-openssl' '--without-pdo-dblib' '--without-qdbm'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
 Configuration File (php.ini) Path => /etc/php
@@ -18,6 +22,7 @@ additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/curl.ini,
 /etc/php/conf.d/dom.ini,
 /etc/php/conf.d/exif.ini,
+/etc/php/conf.d/fileinfo.ini,
 /etc/php/conf.d/ftp.ini,
 /etc/php/conf.d/gd.ini,
 /etc/php/conf.d/gettext.ini,
@@ -28,11 +33,16 @@ additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/mbstring.ini,
 /etc/php/conf.d/mcrypt.ini,
 /etc/php/conf.d/mysqli.ini,
+/etc/php/conf.d/mysqlnd.ini,
 /etc/php/conf.d/opcache.ini,
 /etc/php/conf.d/openssl.ini,
 /etc/php/conf.d/pcntl.ini,
 /etc/php/conf.d/pspell.ini,
+/etc/php/conf.d/session.ini,
+/etc/php/conf.d/simplexml.ini,
 /etc/php/conf.d/sockets.ini,
+/etc/php/conf.d/sodium.ini,
+/etc/php/conf.d/ssh2.ini,
 /etc/php/conf.d/wplib.ini,
 /etc/php/conf.d/xdebug.ini,
 /etc/php/conf.d/xml.ini,
@@ -48,9 +58,9 @@ Debug Build => no
 Thread Safety => disabled
 Zend Memory Manager => enabled
 IPv6 Support => enabled
-Registered PHP Streams => php, file, data, http, ftp, zip, compress.zlib  
+Registered PHP Streams => compress.zlib, php, file, data, http, ftp, ssh2.shell, ssh2.exec, ssh2.tunnel, ssh2.scp, ssh2.sftp, zip  
 Registered Stream Socket Transports => tcp, udp, unix, udg
-Registered Stream Filters => string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, convert.iconv.*, zlib.*
+Registered Stream Filters => zlib.*, convert.iconv.*, string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed
 
 
 This program makes use of the Zend Scripting Language Engine:
@@ -106,7 +116,7 @@ ignore_repeated_errors => Off => Off
 ignore_repeated_source => Off => Off
 ignore_user_abort => Off => Off
 implicit_flush => On => On
-include_path => .:/usr/share/pear => .:/usr/share/pear
+include_path => .:/usr/share/php => .:/usr/share/php
 log_errors => On => On
 log_errors_max_len => 1024 => 1024
 magic_quotes_gpc => On => On
@@ -221,6 +231,7 @@ GIF Create Support => enabled
 JPG Support => enabled
 PNG Support => enabled
 WBMP Support => enabled
+XPM Support => enabled
 XBM Support => enabled
 
 gettext
@@ -275,9 +286,6 @@ mbstring
 
 Multibyte Support => enabled
 Multibyte string engine => libmbfl
-Multibyte (japanese) regex support => enabled
-Multibyte regex (oniguruma) version => 4.4.4
-Multibyte regex (oniguruma) backtrack check => On
 
 mbstring extension makes use of "streamable kanji code filter and converter", which is distributed under the GNU Lesser General Public License version 2.1.
 
@@ -350,7 +358,7 @@ Version => $Id: php_reflection.c,v 1.164.2.33.2.45 2007/08/20 17:01:22 sebastian
 session
 
 Session Support => enabled
-Registered save handlers => files user sqlite 
+Registered save handlers => files user 
 Registered serializer handlers => php php_binary 
 
 Directive => Local Value => Master Value
@@ -406,6 +414,13 @@ SQLite Encoding => iso8859
 Directive => Local Value => Master Value
 sqlite.assoc_case => 0 => 0
 
+ssh2
+
+SSH2 support => enabled
+extension version => 0.13
+libssh2 version => 1.8.0
+banner => SSH-2.0-libssh2_1.8.0
+
 standard
 
 Regex Library => Bundled library enabled
@@ -424,10 +439,6 @@ safe_mode_allowed_env_vars => PHP_ => PHP_
 safe_mode_protected_env_vars => LD_LIBRARY_PATH => LD_LIBRARY_PATH
 url_rewriter.tags => a=href,area=href,frame=src,input=src,form=fakeentry => a=href,area=href,frame=src,input=src,form=fakeentry
 user_agent => no value => no value
-
-tokenizer
-
-Tokenizer Support => enabled
 
 xdebug
 
@@ -510,10 +521,6 @@ author => Dan Libby
 homepage => http://xmlrpc-epi.sourceforge.net
 open sourced by => Epinions.com
 
-xmlwriter
-
-XMLWriter => enabled
-
 zip
 
 Zip => enabled
@@ -543,8 +550,9 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => 47cb89ff627f
+HOSTNAME => 2f673499aa65
 TERM => xterm
+BASE_BUILD =>  
 PACKAGE_VERSION => 5.2.4
 PACKAGE_URL => http://museum.php.net/php5/php-5.2.4.tar.gz
 PACKAGE_ROOT => /
@@ -558,8 +566,9 @@ PHP Variables
 
 Variable => Value
 _SERVER["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_SERVER["HOSTNAME"] => 47cb89ff627f
+_SERVER["HOSTNAME"] => 2f673499aa65
 _SERVER["TERM"] => xterm
+_SERVER["BASE_BUILD"] => 
 _SERVER["PACKAGE_VERSION"] => 5.2.4
 _SERVER["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz
 _SERVER["PACKAGE_ROOT"] => /
@@ -573,15 +582,16 @@ _SERVER["SCRIPT_NAME"] =>
 _SERVER["SCRIPT_FILENAME"] => 
 _SERVER["PATH_TRANSLATED"] => 
 _SERVER["DOCUMENT_ROOT"] => 
-_SERVER["REQUEST_TIME"] => 1528942217
+_SERVER["REQUEST_TIME"] => 1529382283
 _SERVER["argv"] => Array
 (
 )
 
 _SERVER["argc"] => 0
 _ENV["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_ENV["HOSTNAME"] => 47cb89ff627f
+_ENV["HOSTNAME"] => 2f673499aa65
 _ENV["TERM"] => xterm
+_ENV["BASE_BUILD"] => 
 _ENV["PACKAGE_VERSION"] => 5.2.4
 _ENV["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz
 _ENV["PACKAGE_ROOT"] => /
