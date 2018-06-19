@@ -192,6 +192,7 @@ cd ${PHPDIR}; checkExit
 	--with-mysql=shared,/usr/bin/mysql_config \
 	--with-mysqli=shared,/usr/bin/mysql_config \
 	--with-openssl=shared \
+	--with-imap-ssl=shared \
 	--with-pcre-regex=/usr \
 	--with-pdo-dblib=shared \
 	--with-pdo-mysql=shared,/usr/bin/mysql_config \
@@ -223,11 +224,9 @@ cd ${PHPDIR}; checkExit
 	--without-imap-ssl \
 	--without-mhash \
 	--without-mssql \
-	--without-openssl \
 	--without-pdo-dblib \
 	--without-qdbm; checkExit
 
-#	--with-imap-ssl=shared --with-openssl=shared
 #	--enable-option-checking=fatal
 #	--with-fpm-user=${WPLIB_USER}
 #	--with-fpm-group=${WPLIB_GROUP}
@@ -311,7 +310,7 @@ cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/intl-3.0.0.tgz; checkExit
 tar zxf intl-3.0.0.tgz; checkExit
 cd intl-3.0.0; checkExit
-patch -p0 ${BUILDDIR}/php-5.2.4-intl-3.0.0.patch
+patch -p0 < ${BUILDDIR}/php-5.2.4-intl-3.0.0.patch; checkExit
 phpize; checkExit
 ./configure; checkExit
 make; checkExit
@@ -326,15 +325,18 @@ make; checkExit
 make install; checkExit
 
 
-echo "# WPLib Box: Adding libsodium extension, (2.0.11)."
-cd ${PHPDIR}/ext; checkExit
-wget -nv http://pecl.php.net/get/libsodium-2.0.11.tgz; checkExit
-tar zxf libsodium-2.0.11.tgz; checkExit
-cd libsodium-2.0.11; checkExit
-phpize; checkExit
-./configure; checkExit
-make; checkExit
-make install; checkExit
+# Produces this error:
+# /build/php-5.2.4/ext/libsodium-2.0.11/libsodium.c:3995:5: error: too few arguments to function 'add_next_index_stringl'
+#     add_next_index_stringl(return_value, (const char *) header, sizeof header);
+#echo "# WPLib Box: Adding libsodium extension, (2.0.11)."
+#cd ${PHPDIR}/ext; checkExit
+#wget -nv http://pecl.php.net/get/libsodium-2.0.11.tgz; checkExit
+#tar zxf libsodium-2.0.11.tgz; checkExit
+#cd libsodium-2.0.11; checkExit
+#phpize; checkExit
+#./configure; checkExit
+#make; checkExit
+#make install; checkExit
 
 
 # Produces this error:
