@@ -21,9 +21,8 @@ then
 fi
 
 
-# BUILD_DEPS="build-base autoconf apache2-dev aspell-dev bison bzip2-dev curl-dev db-dev enchant-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imap-dev krb5-dev libedit-dev libical-dev libjpeg-turbo-dev libpng-dev libressl-dev libsodium-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev re2c recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev autoconf binutils bison coreutils fakeroot file g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libressl2.6-libcrypto make musl pacman pkgconf re2c rsync aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev libc-dev libedit-dev libmcrypt-dev libpng-dev readline-dev libressl-dev libxml2-dev libxpm-dev libxslt-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev sqlite-dev unixodbc-dev"
-BUILD_BINS="autoconf binutils bison build-base coreutils fakeroot file g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libressl2.6-libcrypto make musl pacman pkgconf re2c rsync"
-BUILD_LIBS="apache2-dev aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev krb5-dev libc-dev libedit-dev libical-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev libressl-dev libsodium-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev readline-dev recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev"
+BUILD_BINS="autoconf binutils bison build-base coreutils fakeroot file g++ gcc gnupg gpgme libarchive-tools make musl pacman pkgconf re2c rsync"
+BUILD_LIBS="apache2-dev aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imagemagick-dev imap-dev jpeg-dev krb5-dev libarchive libcurl libintl libressl2.6-libcrypto libc-dev libedit-dev libical-dev libjpeg-turbo-dev libmcrypt-dev libpng-dev libressl-dev libsodium-dev libssh2-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev readline-dev recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev"
 BUILD_DEPS="${BUILD_BINS} ${BUILD_LIBS}"
 
 PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar xz imagemagick"
@@ -60,6 +59,7 @@ cd ${BUILDDIR}; checkExit
 patch -p0 < install-pear.patch; checkExit
 # patch -p0 < libressl-2.7.patch; checkExit
 patch -p0 < allow-build-recode-and-imap-together.patch; checkExit
+ln /usr/include/tidybuffio.h /usr/include/buffio.h
 
 
 echo "# WPLib Box: Configure PHP ${PACKAGE_VERSION}."
@@ -200,3 +200,24 @@ phpize; checkExit
 make; checkExit
 make install; checkExit
 
+
+echo "# WPLib Box: Adding mcrypt extension, (1.0.1)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/mcrypt-1.0.1.tgz; checkExit
+tar zxf mcrypt-1.0.1.tgz; checkExit
+cd mcrypt-1.0.1; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding ssh2 extension, (1.1.2)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/ssh2-1.1.2.tgz; checkExit
+tar zxf ssh2-1.1.2.tgz; checkExit
+cd ssh2-1.1.2; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
