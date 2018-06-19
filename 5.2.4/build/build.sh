@@ -175,7 +175,7 @@ cd ${PHPDIR}; checkExit
 	--with-gmp=shared \
 	--with-iconv=shared \
 	--with-icu-dir=/usr \
-	--with-imap-ssl \
+	--without-imap-ssl \
 	--with-imap=shared \
 	--with-jpeg-dir=/usr \
 	--with-kerberos \
@@ -186,15 +186,14 @@ cd ${PHPDIR}; checkExit
 	--with-libxml-dir=/usr \
 	--with-libzip=/usr \
 	--with-mcrypt=shared \
-	--with-mhash=shared \
-	--with-mssql=shared \
+	--without-mhash \
+	--without-mssql \
 	--with-mysql-sock=/run/mysqld/mysqld.sock \
 	--with-mysql=shared,/usr/bin/mysql_config \
 	--with-mysqli=shared,/usr/bin/mysql_config \
 	--with-openssl=shared \
-	--with-imap-ssl=shared \
 	--with-pcre-regex=/usr \
-	--with-pdo-dblib=shared \
+	--without-pdo-dblib \
 	--with-pdo-mysql=shared,/usr/bin/mysql_config \
 	--with-pdo-odbc=shared,unixODBC,/usr \
 	--with-pdo-pgsql=shared \
@@ -221,10 +220,6 @@ cd ${PHPDIR}; checkExit
 	--without-db1 \
 	--without-db2 \
 	--without-db3 \
-	--without-imap-ssl \
-	--without-mhash \
-	--without-mssql \
-	--without-pdo-dblib \
 	--without-qdbm; checkExit
 
 #	--enable-option-checking=fatal
@@ -234,7 +229,6 @@ cd ${PHPDIR}; checkExit
 #	--enable-phpdbg
 #	--with-enchant=shared
 #	--with-icu-dir=/usr
-#	--enable-intl=shared
 #	--enable-phar=shared
 #	--with-sqlite3=shared,/usr
 #	--enable-opcache
@@ -248,7 +242,7 @@ echo "# WPLib Box: Install PHP ${PACKAGE_VERSION}."
 make install; checkExit
 install -d -m755 /etc/php/conf.d/; checkExit
 rmdir /usr/include/php/include; checkExit
-mkdir -p /var/run/php; checkExit
+mkdir -p /run/php; checkExit
 ln /usr/bin/php-cgi /usr/sbin/php-fpm
 
 

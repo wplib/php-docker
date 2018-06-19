@@ -27,7 +27,7 @@ COPY container.json /etc/container.json
 COPY files /
 COPY tarball /tmp
 
-RUN ls -l /tmp && cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball
+RUN ls -l /tmp && cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball && mkdir /run/php
 
 COPY files /
 
