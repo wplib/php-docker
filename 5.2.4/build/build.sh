@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # ssh-keygen -A
+BUILDDIR="/build"
 
 
 checkExit()
@@ -13,19 +14,19 @@ checkExit()
 }
 
 
-if [ ! -d /build ]
+if [ ! -d ${BUILDDIR} ]
 then
-	echo "# WPLib Box: /build doesn't exist."
+	echo "# WPLib Box: ${BUILDDIR} doesn't exist."
 	exit
 fi
 
 
-# BUILD_DEPS="autoconf binutils bison coreutils diffutils dpkg fakeroot file flex g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libpthread-stubs libressl2.6-libcrypto make musl musl-utils pacman pkgconf re2c rsync aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gmp-dev icu-dev imagemagick6-dev imap-dev jpeg-dev libc-dev libedit-dev libmcrypt-dev libpng-dev readline-dev libressl-dev libxml2-dev libxpm-dev libxslt-dev mariadb-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev sqlite-dev unixodbc-dev"
-BUILD_DEPS="imagemagick autoconf binutils coreutils diffutils dpkg fakeroot file flex g++ gcc gnupg gpgme libarchive libarchive-tools libcurl libintl libpthread-stubs libressl2.6-libcrypto make musl musl-utils pacman pkgconf re2c rsync aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev freetds-dev freetype-dev gdbm-dev gmp-dev icu-dev imagemagick6-dev imap-dev jpeg-dev libc-dev libedit-dev libmcrypt-dev libpng-dev readline-dev libressl-dev libxml2-dev libxpm-dev libxslt-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev sqlite-dev unixodbc-dev"
+BUILD_BINS="autoconf binutils bison build-base coreutils fakeroot file flex g++ gcc gnupg gpgme libarchive-tools make musl musl-utils pacman pkgconf re2c rsync"
+BUILD_LIBS="apache2-dev aspell-dev bzip2-dev curl-dev db-dev dpkg-dev enchant-dev file-dev freetds-dev freetype-dev gdbm-dev gettext-dev gmp-dev icu-dev imagemagick6-dev imap-dev jpeg-dev krb5-dev libarchive libc-dev libcurl libedit-dev libical-dev libintl libjpeg-turbo-dev libmcrypt-dev libpng-dev libpthread-stubs libressl-dev libressl2.6-libcrypto libsodium-dev libssh2-dev libwebp-dev libxml2-dev libxpm-dev libxslt-dev libzip-dev musl-dev net-snmp-dev openldap-dev pcre-dev postgresql-dev readline-dev recode-dev sqlite-dev tidyhtml-dev unixodbc-dev zlib-dev"
+BUILD_DEPS="${BUILD_BINS} ${BUILD_LIBS}"
 
-PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar xz libressl"
+PERSIST_DEPS="bash sudo wget curl gnupg openssl shadow pcre ca-certificates tar xz imagemagick6"
 
-BUILDDIR="/build"
 PHPDIR="${BUILDDIR}/php-${PACKAGE_VERSION}"
 MYSQL_VERSION="5.1.72"
 MYSQLDIR="${BUILDDIR}/mysql-${MYSQL_VERSION}"
@@ -96,6 +97,7 @@ patch -p0 < php-5.2.4-openssl.patch; checkExit
 patch -p0 < php-5.2.4-pcre_fix.patch; checkExit
 patch -p0 < php-5.2.4-fpm-0.5.3.patch; checkExit
 perl -p -i -e 's/HAVE_SYS_TIME_H/HAVE_SYS_TIME_H\n#define CLOCK_REALTIME 0/g' php-${PACKAGE_VERSION}/libevent/event.c; checkExit
+ln /usr/include/tidybuffio.h /usr/include/buffio.h
 
 # Because configure is broken in 5.2.4.
 cp ${BUILDDIR}/config.cache ${PHPDIR}; checkExit
@@ -103,79 +105,127 @@ cp ${BUILDDIR}/config.cache ${PHPDIR}; checkExit
 
 echo "# WPLib Box: Configure PHP ${PACKAGE_VERSION}."
 cd ${PHPDIR}; checkExit
-
-# https://php-fpm.org/downloads/php-5.2.17-fpm-0.5.14.diff.gz
-# https://php-fpm.org/downloads/php-5.2.4-fpm-0.5.3.diff.gz
-
-./configure --prefix=/usr \
-	--sysconfdir=/etc/php \
+./configure \
+	--enable-fpm --with-fpm-user=${WPLIB_USER} --with-fpm-group=${WPLIB_GROUP} \
+	--datadir=/usr/share/php \
+	--disable-debug \
+	--disable-gd-jis-conv \
+	--disable-rpath \
+	--disable-short-tags \
+	--disable-static \
+	--enable-bcmath=shared \
+	--enable-calendar=shared \
+	--enable-cgi \
+	--enable-cli \
+	--enable-ctype=shared \
+	--enable-dba=shared \
+	--enable-dom=shared \
+	--enable-exif=shared \
+	--enable-fastcgi \
+	--enable-fileinfo=shared \
+	--enable-force-cgi-redirect \
+	--enable-ftp=shared \
+	--enable-gd-native-ttf \
+	--enable-inline-optimization \
+	--enable-intl=shared \
+	--enable-json=shared \
+	--enable-libxml \
+	--enable-mbregex=shared \
+	--enable-mbstring=shared \
+	--enable-mysqlnd=shared \
+	--enable-opcache=shared \
+	--enable-option-checking=fatal \
+	--enable-pcntl=shared \
+	--enable-pdo \
+	--enable-phar=shared \
+	--enable-phpdbg \
+	--enable-posix=shared \
+	--enable-session=shared \
+	--enable-shared \
+	--enable-shmop=shared \
+	--enable-simplexml=shared \
+	--enable-soap=shared \
+	--enable-sockets=shared \
+	--enable-sysvmsg=shared \
+	--enable-sysvsem=shared \
+	--enable-sysvshm=shared \
+	--enable-tokenizer=shared \
+	--enable-wddx=shared \
+	--enable-xml=shared \
+	--enable-xmlreader=shared \
+	--enable-xmlwriter=shared \
+	--enable-zip=shared \
+	--libdir=/usr/lib/php \
 	--localstatedir=/var \
-	--with-layout=GNU \
+	--mandir=/usr/share/man \
+	--prefix=/usr \
+	--sysconfdir=/etc/php \
+	--with-bz2=shared \
+	--without-cdb \
 	--with-config-file-path=/etc/php \
 	--with-config-file-scan-dir=/etc/php/conf.d \
-	--mandir=/usr/share/man \
-	--enable-inline-optimization \
-	--enable-fpm \
-	--enable-cgi --enable-fastcgi --enable-force-cgi-redirect \
-	--enable-cli \
-	--disable-debug \
-	--disable-rpath \
-	--disable-static \
-	--enable-shared \
-	--with-pic \
-	--without-mhash \
-	--with-pear \
-	--with-libedit \
-	--enable-bcmath=shared \
-	--with-bz2=shared \
-	--enable-calendar=shared \
-	--with-cdb \
-	--enable-ctype=shared \
 	--with-curl=shared \
-	--with-freetype-dir=shared,/usr \
-	--enable-ftp=shared \
-	--enable-exif=shared \
-	--with-gd=shared --enable-gd-native-ttf \
-	--with-png-dir=shared,/usr \
+	--without-db4 \
+	--with-dbmaker=shared \
+	--with-enchant=shared \
+	--with-freetype-dir=/usr \
+	--with-gd=shared \
+	--without-gdbm \
 	--with-gettext=shared \
 	--with-gmp=shared \
 	--with-iconv=shared \
+	--with-icu-dir=/usr \
+	--with-imap-ssl \
 	--with-imap=shared \
-	--with-jpeg-dir=shared,/usr \
-	--enable-json=shared \
-	--with-ldap=shared \
-	--enable-mbregex \
-	--enable-mbstring=all \
+	--with-jpeg-dir=/usr \
+	--with-kerberos \
+	--with-layout=GNU \
+	--without-ldap-sasl \
+	--without-ldap \
+	--with-libedit \
+	--with-libxml-dir=/usr \
+	--with-libzip=/usr \
 	--with-mcrypt=shared \
-	--with-mysql=shared,/usr/bin/mysql_config --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-mysqli=shared,/usr/bin/mysql_config \
-	--without-imap-ssl --without-openssl \
+	--with-mhash=shared \
+	--with-mssql=shared \
+	--with-mysql-sock=/run/mysqld/mysqld.sock \
+	--with-mysql=shared,/usr/bin/mysql_config \
+	--with-mysqli=shared,/usr/bin/mysql_config \
+	--with-openssl=shared \
 	--with-pcre-regex=/usr \
-	--enable-pcntl=shared \
-	--enable-posix=shared \
-	--with-pspell=shared \
-	--with-regex=php \
-	--enable-session \
-	--enable-shmop=shared \
-	--with-snmp=shared \
-	--enable-soap=shared \
-	--enable-sockets=shared \
-	--enable-sysvmsg=shared --enable-sysvsem=shared --enable-sysvshm=shared \
-	--with-unixODBC=shared,/usr \
-	--enable-dom=shared --enable-libxml=shared --enable-xml=shared --enable-xmlreader=shared --with-xmlrpc=shared --with-xsl=shared \
-	--enable-wddx=shared \
-	--enable-zip=shared --with-zlib=shared \
-	--enable-dba=shared \
-	--with-gdbm=shared \
-	--without-db4 \
-	--without-db1 --without-db2 --without-db3 --without-qdbm \
-	--without-mssql \
-	--enable-pdo=static \
+	--with-pdo-dblib=shared \
 	--with-pdo-mysql=shared,/usr/bin/mysql_config \
 	--with-pdo-odbc=shared,unixODBC,/usr \
 	--with-pdo-pgsql=shared \
 	--with-pdo-sqlite=shared,/usr \
+	--with-pear=/usr/share/php \
+	--with-pgsql=shared \
+	--with-pic \
+	--with-png-dir=/usr \
+	--with-pspell=shared \
+	--without-recode \
+	--with-readline \
+	--with-regex=php \
+	--with-snmp=shared \
+	--with-sqlite3=shared,/usr \
+	--with-system-ciphers \
+	--with-tidy=shared \
+	--with-unixODBC=shared,/usr \
+	--with-webp-dir=/usr \
+	--with-xmlrpc=shared \
+	--with-xpm-dir=/usr \
+	--with-xsl=shared \
+	--with-zlib \
+	--with-zlib-dir=/usr \
+	--without-db1 \
+	--without-db2 \
+	--without-db3 \
+	--without-imap-ssl \
+	--without-mhash \
+	--without-mssql \
+	--without-openssl \
 	--without-pdo-dblib \
-	--with-pgsql=shared; checkExit
+	--without-qdbm; checkExit
 
 #	--with-imap-ssl=shared --with-openssl=shared
 #	--enable-option-checking=fatal
@@ -211,14 +261,6 @@ sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
 pecl update-channels; checkExit
 
 
-echo "# WPLib Box: Adding mbstring extension."
-cd ${PHPDIR}/ext/mbstring; checkExit
-phpize; checkExit
-./configure; checkExit
-make; checkExit
-make install; checkExit
-
-
 echo "# WPLib Box: Adding Imagick extension, (3.4.3)."
 cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/imagick-3.4.3.tgz; checkExit
@@ -236,6 +278,59 @@ cd ${PHPDIR}/ext; checkExit
 wget -nv https://xdebug.org/files/xdebug-2.2.7.tgz; checkExit
 tar zxf xdebug-2.2.7.tgz; checkExit
 cd xdebug-2.2.7; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding ssh2 extension, (0.13)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/ssh2-0.13.tgz; checkExit
+tar zxf ssh2-0.13.tgz; checkExit
+cd ssh2-0.13; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding fileinfo extension, (1.0.4)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/Fileinfo-1.0.4.tgz; checkExit
+tar zxf Fileinfo-1.0.4.tgz; checkExit
+cd Fileinfo-1.0.4; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding intl extension, (3.0.0)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/intl-3.0.0.tgz; checkExit
+tar zxf intl-3.0.0.tgz; checkExit
+cd intl-3.0.0; checkExit
+patch -p0 ${BUILDDIR}/php-5.2.4-intl-3.0.0.patch
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding mbstring extension."
+cd ${PHPDIR}/ext/mbstring; checkExit
+phpize; checkExit
+./configure; checkExit
+make; checkExit
+make install; checkExit
+
+
+echo "# WPLib Box: Adding libsodium extension, (2.0.11)."
+cd ${PHPDIR}/ext; checkExit
+wget -nv http://pecl.php.net/get/libsodium-2.0.11.tgz; checkExit
+tar zxf libsodium-2.0.11.tgz; checkExit
+cd libsodium-2.0.11; checkExit
 phpize; checkExit
 ./configure; checkExit
 make; checkExit
