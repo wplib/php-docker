@@ -2,7 +2,7 @@ Failed loading /usr/lib/php/modules/opcache.so:  Error loading shared library /u
 phpinfo()
 PHP Version => 5.2.4
 
-System => Linux aac45d8ff3f7 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+System => Linux 156b9f55a14f 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
 Build Date => Jun 19 2018 08:51:46
 Configure Command =>  './configure'  '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-debug' '--disable-gd-jis-conv' '--disable-rpath' '--disable-short-tags' '--disable-static' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-cgi' '--enable-cli' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fastcgi' '--enable-fileinfo=shared' '--enable-force-cgi-redirect' '--enable-ftp=shared' '--enable-gd-native-ttf' '--enable-inline-optimization' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbregex=shared' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-option-checking=fatal' '--enable-pcntl=shared' '--enable-pdo' '--enable-phar=shared' '--enable-phpdbg' '--enable-posix=shared' '--enable-session=shared' '--enable-shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--mandir=/usr/share/man' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--without-cdb' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--without-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--without-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--without-ldap-sasl' '--without-ldap' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mcrypt=shared' '--with-mhash=shared' '--with-mssql=shared' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysql=shared,/usr/bin/mysql_config' '--with-mysqli=shared,/usr/bin/mysql_config' '--with-openssl=shared' '--with-imap-ssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,/usr/bin/mysql_config' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--without-recode' '--with-readline' '--with-regex=php' '--with-snmp=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-db1' '--without-db2' '--without-db3' '--without-imap-ssl' '--without-mhash' '--without-mssql' '--without-pdo-dblib' '--without-qdbm'
 Server API => Command Line Interface
@@ -291,6 +291,24 @@ libXML support => active
 libXML Version => 2.9.7
 libXML streams => enabled
 
+mbstring
+
+Multibyte Support => enabled
+Multibyte string engine => libmbfl
+
+mbstring extension makes use of "streamable kanji code filter and converter", which is distributed under the GNU Lesser General Public License version 2.1.
+
+Directive => Local Value => Master Value
+mbstring.detect_order => no value => no value
+mbstring.encoding_translation => Off => Off
+mbstring.func_overload => 0 => 0
+mbstring.http_input => pass => pass
+mbstring.http_output => pass => pass
+mbstring.internal_encoding => ISO-8859-1 => no value
+mbstring.language => neutral => neutral
+mbstring.strict_detection => Off => Off
+mbstring.substitute_character => no value => no value
+
 mcrypt
 
 mcrypt support => enabled
@@ -546,7 +564,7 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => aac45d8ff3f7
+HOSTNAME => 156b9f55a14f
 TERM => xterm
 PACKAGE_VERSION => 5.2.4
 PACKAGE_URL => http://museum.php.net/php5/php-5.2.4.tar.gz
@@ -561,7 +579,7 @@ PHP Variables
 
 Variable => Value
 _SERVER["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_SERVER["HOSTNAME"] => aac45d8ff3f7
+_SERVER["HOSTNAME"] => 156b9f55a14f
 _SERVER["TERM"] => xterm
 _SERVER["PACKAGE_VERSION"] => 5.2.4
 _SERVER["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz
@@ -576,14 +594,14 @@ _SERVER["SCRIPT_NAME"] =>
 _SERVER["SCRIPT_FILENAME"] => 
 _SERVER["PATH_TRANSLATED"] => 
 _SERVER["DOCUMENT_ROOT"] => 
-_SERVER["REQUEST_TIME"] => 1529405790
+_SERVER["REQUEST_TIME"] => 1529408258
 _SERVER["argv"] => Array
 (
 )
 
 _SERVER["argc"] => 0
 _ENV["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_ENV["HOSTNAME"] => aac45d8ff3f7
+_ENV["HOSTNAME"] => 156b9f55a14f
 _ENV["TERM"] => xterm
 _ENV["PACKAGE_VERSION"] => 5.2.4
 _ENV["PACKAGE_URL"] => http://museum.php.net/php5/php-5.2.4.tar.gz

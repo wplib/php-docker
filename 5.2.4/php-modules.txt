@@ -17,6 +17,7 @@ imagick
 intl
 json
 libxml
+mbstring
 mcrypt
 mysqli
 openssl
