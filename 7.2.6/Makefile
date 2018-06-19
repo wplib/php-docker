@@ -153,11 +153,11 @@ clean:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	rm php-base-info.txt php-base-modules.txt php-info.txt php-modules.txt tarball
 	docker image rm $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
 	-docker image rm $(IMAGE_NAME):$(MAJORVERSION)
 endif
+	-rm php-base-info.txt php-base-modules.txt php-info.txt php-modules.txt tarball
 endif
 
 
