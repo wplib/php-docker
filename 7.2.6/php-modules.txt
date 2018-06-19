@@ -1,4 +1,3 @@
-PHP Warning:  PHP Startup: Unable to load dynamic library 'mcrypt.so' (tried: /usr/lib/php/modules/mcrypt.so (Error loading shared library /usr/lib/php/modules/mcrypt.so: No such file or directory), /usr/lib/php/modules/mcrypt.so.so (Error loading shared library /usr/lib/php/modules/mcrypt.so.so: No such file or directory)) in Unknown on line 0
 [PHP Modules]
 bcmath
 Core
@@ -7,6 +6,7 @@ curl
 date
 dom
 exif
+fileinfo
 filter
 ftp
 gd
@@ -18,6 +18,7 @@ intl
 json
 libxml
 mbstring
+mcrypt
 mysqli
 mysqlnd
 openssl
@@ -27,8 +28,11 @@ pspell
 readline
 Reflection
 session
+SimpleXML
 sockets
+sodium
 SPL
+ssh2
 standard
 xdebug
 xml

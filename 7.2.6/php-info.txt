@@ -1,9 +1,8 @@
-PHP Warning:  PHP Startup: Unable to load dynamic library 'mcrypt.so' (tried: /usr/lib/php/modules/mcrypt.so (Error loading shared library /usr/lib/php/modules/mcrypt.so: No such file or directory), /usr/lib/php/modules/mcrypt.so.so (Error loading shared library /usr/lib/php/modules/mcrypt.so.so: No such file or directory)) in Unknown on line 0
 phpinfo()
 PHP Version => 7.2.6
 
-System => Linux 8b5c36412563 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
-Build Date => Jun 15 2018 03:41:03
+System => Linux a837a2d9dff5 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+Build Date => Jun 18 2018 10:28:34
 Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-posix=shared' '--enable-session=shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-snmp=shared' '--with-sodium=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-webp-dir=/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-readline'
 Server API => Command Line Interface
 Virtual Directory Support => disabled
@@ -15,6 +14,7 @@ Additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/curl.ini,
 /etc/php/conf.d/dom.ini,
 /etc/php/conf.d/exif.ini,
+/etc/php/conf.d/fileinfo.ini,
 /etc/php/conf.d/ftp.ini,
 /etc/php/conf.d/gd.ini,
 /etc/php/conf.d/gettext.ini,
@@ -24,20 +24,23 @@ Additional .ini files parsed => /etc/php/conf.d/bcmath.ini,
 /etc/php/conf.d/json.ini,
 /etc/php/conf.d/mbstring.ini,
 /etc/php/conf.d/mcrypt.ini,
-/etc/php/conf.d/mysqli.ini,
 /etc/php/conf.d/mysqlnd.ini,
 /etc/php/conf.d/opcache.ini,
 /etc/php/conf.d/openssl.ini,
 /etc/php/conf.d/pcntl.ini,
 /etc/php/conf.d/pspell.ini,
 /etc/php/conf.d/session.ini,
+/etc/php/conf.d/simplexml.ini,
 /etc/php/conf.d/sockets.ini,
+/etc/php/conf.d/sodium.ini,
+/etc/php/conf.d/ssh2.ini,
 /etc/php/conf.d/wplib.ini,
 /etc/php/conf.d/xdebug.ini,
 /etc/php/conf.d/xml.ini,
 /etc/php/conf.d/xmlreader.ini,
 /etc/php/conf.d/xmlrpc.ini,
-/etc/php/conf.d/zip.ini
+/etc/php/conf.d/zip.ini,
+/etc/php/conf.d/zlib.ini
 
 PHP API => 20170718
 PHP Extension => 20170718
@@ -52,9 +55,9 @@ Zend Multibyte Support => provided by mbstring
 IPv6 Support => enabled
 DTrace Support => disabled
 
-Registered PHP Streams => compress.zlib, php, file, glob, data, http, ftp, https, ftps, zip
+Registered PHP Streams => compress.zlib, php, file, glob, data, http, ftp, https, ftps, ssh2.shell, ssh2.exec, ssh2.tunnel, ssh2.scp, ssh2.sftp, zip
 Registered Stream Socket Transports => tcp, udp, unix, udg, ssl, tls, tlsv1.0, tlsv1.1, tlsv1.2
-Registered Stream Filters => zlib.*, string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, dechunk, convert.iconv.*
+Registered Stream Filters => zlib.*, string.rot13, string.toupper, string.tolower, string.strip_tags, convert.*, consumed, dechunk, convert.iconv.*, mcrypt.*, mdecrypt.*
 
 This program makes use of the Zend Scripting Language Engine:
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
@@ -245,6 +248,12 @@ exif.decode_unicode_motorola => UCS-2BE => UCS-2BE
 exif.encode_jis => no value => no value
 exif.encode_unicode => ISO-8859-15 => ISO-8859-15
 
+fileinfo
+
+fileinfo support => enabled
+version => 1.0.5
+libmagic => 531
+
 filter
 
 Input Validation and Filtering => enabled
@@ -369,6 +378,19 @@ mbstring.internal_encoding => no value => no value
 mbstring.language => neutral => neutral
 mbstring.strict_detection => Off => Off
 mbstring.substitute_character => no value => no value
+
+mcrypt
+
+mcrypt support => enabled
+mcrypt_filter support => enabled
+Version => 2.5.8
+Api No => 20021217
+Supported ciphers => cast-128 gost rijndael-128 twofish arcfour cast-256 loki97 rijndael-192 saferplus wake blowfish-compat des rijndael-256 serpent xtea blowfish enigma rc2 tripledes 
+Supported modes => cbc cfb ctr ecb ncfb nofb ofb stream 
+
+Directive => Local Value => Master Value
+mcrypt.algorithms_dir => no value => no value
+mcrypt.modes_dir => no value => no value
 
 mysqli
 
@@ -575,8 +597,8 @@ bytes_received_real_data_ps => 0
 openssl
 
 OpenSSL support => enabled
-OpenSSL Library Version => LibreSSL 2.6.4
-OpenSSL Header Version => LibreSSL 2.6.4
+OpenSSL Library Version => LibreSSL 2.6.5
+OpenSSL Header Version => LibreSSL 2.6.5
 Openssl default config => /etc/ssl/openssl.cnf
 
 Directive => Local Value => Master Value
@@ -653,15 +675,34 @@ session.use_only_cookies => 1 => 1
 session.use_strict_mode => 0 => 0
 session.use_trans_sid => 0 => 0
 
+SimpleXML
+
+Simplexml support => enabled
+Revision => $Id: 341daed0ee94ea8f728bfd0ba4626e6ed365c0d1 $
+Schema support => enabled
+
 sockets
 
 Sockets Support => enabled
+
+sodium
+
+sodium support => enabled
+libsodium headers version => 1.0.15
+libsodium library version => 1.0.15
 
 SPL
 
 SPL support => enabled
 Interfaces => OuterIterator, RecursiveIterator, SeekableIterator, SplObserver, SplSubject
 Classes => AppendIterator, ArrayIterator, ArrayObject, BadFunctionCallException, BadMethodCallException, CachingIterator, CallbackFilterIterator, DirectoryIterator, DomainException, EmptyIterator, FilesystemIterator, FilterIterator, GlobIterator, InfiniteIterator, InvalidArgumentException, IteratorIterator, LengthException, LimitIterator, LogicException, MultipleIterator, NoRewindIterator, OutOfBoundsException, OutOfRangeException, OverflowException, ParentIterator, RangeException, RecursiveArrayIterator, RecursiveCachingIterator, RecursiveCallbackFilterIterator, RecursiveDirectoryIterator, RecursiveFilterIterator, RecursiveIteratorIterator, RecursiveRegexIterator, RecursiveTreeIterator, RegexIterator, RuntimeException, SplDoublyLinkedList, SplFileInfo, SplFileObject, SplFixedArray, SplHeap, SplMinHeap, SplMaxHeap, SplObjectStorage, SplPriorityQueue, SplQueue, SplStack, SplTempFileObject, UnderflowException, UnexpectedValueException
+
+ssh2
+
+SSH2 support => enabled
+extension version => 1.1.2
+libssh2 version => 1.8.0
+banner => SSH-2.0-libssh2_1.8.0
 
 standard
 
@@ -848,7 +889,7 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => 8b5c36412563
+HOSTNAME => a837a2d9dff5
 TERM => xterm
 PACKAGE_VERSION => 7.2.6
 PACKAGE_URL => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
@@ -863,7 +904,7 @@ PHP Variables
 
 Variable => Value
 $_SERVER['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_SERVER['HOSTNAME'] => 8b5c36412563
+$_SERVER['HOSTNAME'] => a837a2d9dff5
 $_SERVER['TERM'] => xterm
 $_SERVER['PACKAGE_VERSION'] => 7.2.6
 $_SERVER['PACKAGE_URL'] => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
@@ -878,15 +919,15 @@ $_SERVER['SCRIPT_NAME'] =>
 $_SERVER['SCRIPT_FILENAME'] => 
 $_SERVER['PATH_TRANSLATED'] => 
 $_SERVER['DOCUMENT_ROOT'] => 
-$_SERVER['REQUEST_TIME_FLOAT'] => 1529045430.7664
-$_SERVER['REQUEST_TIME'] => 1529045430
+$_SERVER['REQUEST_TIME_FLOAT'] => 1529318582.6082
+$_SERVER['REQUEST_TIME'] => 1529318582
 $_SERVER['argv'] => Array
 (
 )
 
 $_SERVER['argc'] => 0
 $_ENV['PATH'] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-$_ENV['HOSTNAME'] => 8b5c36412563
+$_ENV['HOSTNAME'] => a837a2d9dff5
 $_ENV['TERM'] => xterm
 $_ENV['PACKAGE_VERSION'] => 7.2.6
 $_ENV['PACKAGE_URL'] => http://php.net/get/php-7.2.6.tar.gz/from/this/mirror
