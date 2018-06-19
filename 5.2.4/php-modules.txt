@@ -1,0 +1,45 @@
+Failed loading /usr/lib/php/modules/opcache.so:  Error loading shared library /usr/lib/php/modules/opcache.so: No such file or directory
+[PHP Modules]
+bcmath
+ctype
+curl
+date
+dom
+exif
+fileinfo
+filter
+ftp
+gd
+gettext
+hash
+iconv
+imagick
+intl
+json
+libxml
+mcrypt
+mysqli
+openssl
+pcntl
+pcre
+PDO
+pspell
+readline
+Reflection
+session
+SimpleXML
+sockets
+SPL
+SQLite
+ssh2
+standard
+xdebug
+xml
+xmlreader
+xmlrpc
+zip
+zlib
+
+[Zend Modules]
+Xdebug
+
