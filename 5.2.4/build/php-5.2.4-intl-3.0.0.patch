@@ -1,0 +1,21 @@
+--- /tmp/breakiterator_iterators.cpp
++++ breakiterator/breakiterator_iterators.cpp
+@@ -18,6 +18,18 @@
+ #include "config.h"
+ #endif
+
++#if ZEND_MODULE_API_NO < 20071006
++/* not 5.3 */
++#ifndef ALLOCA_FLAG
++#define ALLOCA_FLAG(use_heap)
++#endif
++#define _do_alloca(x, y) do_alloca((x))
++#define _free_alloca(x, y) free_alloca((x))
++#else
++#define _do_alloca do_alloca
++#define _free_alloca free_alloca
++#endif
++
+ #include <unicode/brkiter.h>
+
+ #include "breakiterator_iterators.h"
