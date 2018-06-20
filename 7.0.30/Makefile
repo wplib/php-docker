@@ -71,12 +71,17 @@ LOGFILE := $(NAME)-$(shell date +'%Y%m%d-%H%M%S').log
 default: all
 
 all:
+	@echo "info-base	- Generate PHP info from base container image."
 	@echo "clean-base	- Clean base container image."
 	@echo "build-base	- Build base container image."
+	@echo "push-base	- Push base container image to DockerHub."
+	@echo ""
 	@echo "info		- Generate PHP info from runtime container image."
-	@echo "build		- Generate runtime image from base container image."
-	@echo "clean		- Clean runtime image."
-	@echo "build-full	- Generate runtime image without base reference."
+	@echo "clean		- Clean runtime container image."
+	@echo "build		- Generate runtime container image from base container image."
+	@echo "push		- Push runtime container image to DockerHub."
+	@echo ""
+	@echo "build-full	- Generate runtime container image without base reference."
 	@echo ""
 	@echo "Process:"
 	@echo "	make clean-base"
@@ -85,14 +90,21 @@ all:
 	@echo "	make build"
 
 
-build-base: $(DOCKERFILE)
-	@make build-full BUILD_TYPE="base"
-
+################################################################################
+info-base: $(DOCKERFILE)
+	@make info BUILD_TYPE="base"
 
 clean-base: $(DOCKERFILE)
 	@make clean BUILD_TYPE="base"
 
+build-base: $(DOCKERFILE)
+	@make build-full BUILD_TYPE="base"
 
+push-base: $(DOCKERFILE)
+	@make push BUILD_TYPE="base"
+
+
+################################################################################
 info:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -102,33 +114,37 @@ else
 endif
 
 
+################################################################################
 build: DockerfileTarball
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
 	docker run --rm -it -v `pwd`:/tmp $(PROJECT)/$(NAME)-base:$(VERSION) tar cf /tmp/tarball --exclude=/build --exclude=/etc/hostname --exclude=/etc/hosts --exclude=/etc/resolv.conf /bin /etc /home /lib /media /mnt /root /sbin /usr /var
 	docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f DockerfileTarball .
-	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
-	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
 	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 endif
 
 
+################################################################################
 build-full: $(DOCKERFILE)
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
 	script -r -t 10 logs/$(LOGFILE) docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f $(DOCKERFILE) .
-	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
-	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
 	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 	@echo "WPLib: Log file saved to \"logs/$(LOGFILE)\""
 endif
 
+
+################################################################################
 push:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -140,18 +156,20 @@ endif
 endif
 
 
+################################################################################
 release: build
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	@make clean
 	@make clean-base
 	@make build-base
+	@make clean
 	@make build
 	@make push
 endif
 
 
+################################################################################
 clean:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -164,6 +182,7 @@ endif
 endif
 
 
+################################################################################
 list:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -175,6 +194,7 @@ endif
 endif
 
 
+################################################################################
 inspect:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -183,6 +203,7 @@ else
 endif
 
 
+################################################################################
 test:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -203,6 +224,7 @@ else
 endif
 
 
+################################################################################
 shell:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -211,6 +233,7 @@ else
 endif
 
 
+################################################################################
 run:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -219,6 +242,7 @@ else
 endif
 
 
+################################################################################
 start:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -227,6 +251,7 @@ else
 endif
 
 
+################################################################################
 stop:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
@@ -235,6 +260,7 @@ else
 endif
 
 
+################################################################################
 rm:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
