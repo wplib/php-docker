@@ -1,7 +1,11 @@
 ![PHP 7.2.x](https://img.shields.io/badge/PHP-7.2.x-green.svg)
 ![PHP 7.1.x](https://img.shields.io/badge/PHP-7.1.x-green.svg)
 ![PHP 7.0.x](https://img.shields.io/badge/PHP-7.0.x-green.svg)
-![PHP 5.6.x](https://img.shields.io/badge/PHP-5.6.x-green.svg)
+![PHP 5.6.36](https://img.shields.io/badge/PHP-5.6.36-green.svg)
+![PHP 5.5.38](https://img.shields.io/badge/PHP-5.5.38-green.svg)
+![PHP 5.4.45](https://img.shields.io/badge/PHP-5.4.45-green.svg)
+![PHP 5.3.29](https://img.shields.io/badge/PHP-5.3.29-green.svg)
+![PHP 5.2.4](https://img.shields.io/badge/PHP-5.2.4-green.svg)
 
 
 ```
@@ -16,19 +20,27 @@
 ![WPLib-Box](https://github.com/wplib/wplib.github.io/raw/master/WPLib-Box-100x.png)
 
 
-# PHP-FPM Docker Container for WPLib Box
-This is the repository for the [PHP-FPM](https://php-fpm.org/) Docker container implemented for [WPLib-Box](https://github.com/wplib/wplib-box).
-It currently provides versions 5.6.x 7.0.x 7.1.x 7.2.x
+# PHP Docker Container for WPLib Box
+This is the repository for the [PHP](https://php.org/) Docker container implemented for [WPLib-Box](https://github.com/wplib/wplib-box).
+It currently provides versions 5.2.4 5.3.29 5.4.45 5.5.38 5.6.36 7.0.x 7.1.x 7.2.x
 
 
-## Supported tags and respective Dockerfiles
-`7.2.5`, `7.2`, `latest` _([7.2.5/Dockerfile](https://github.com/wplib/php-fpm-docker/blob/master/7.2.5/Dockerfile))_
+## Supported tags and respective build directories
+`7.2.6`, `7.2`, `latest` _([7.2.6/](https://github.com/wplib/php-docker/blob/master/7.2.6/))_
 
-`7.1.17`, `7.1` _([7.1.17/Dockerfile](https://github.com/wplib/php-fpm-docker/blob/master/7.1.17/Dockerfile))_
+`7.1.18`, `7.1` _([7.1.18/](https://github.com/wplib/php-docker/blob/master/7.1.18/))_
 
-`7.0.30`, `7.0` _([7.0.30/Dockerfile](https://github.com/wplib/php-fpm-docker/blob/master/7.0.30/Dockerfile))_
+`7.0.30`, `7.0` _([7.0.30/](https://github.com/wplib/php-docker/blob/master/7.0.30/))_
 
-`5.6.36`, `5.6` _([5.6.36/Dockerfile](https://github.com/wplib/php-fpm-docker/blob/master/5.6.36/Dockerfile))_
+`5.6.36`, `5.6` _([5.6.36/](https://github.com/wplib/php-docker/blob/master/5.6.36/))_
+
+`5.5.38`, `5.5` _([5.5.38/](https://github.com/wplib/php-docker/blob/master/5.5.38/))_
+
+`5.4.45`, `5.4` _([5.4.45/](https://github.com/wplib/php-docker/blob/master/5.4.45/))_
+
+`5.3.29`, `5.3` _([5.3.29/](https://github.com/wplib/php-docker/blob/master/5.3.29/))_
+
+`5.2.4`, `5.2` _([5.2.4/](https://github.com/wplib/php-docker/blob/master/5.2.4/))_
 
 
 ## Using this container.
@@ -39,35 +51,35 @@ Or you can use the GitHub method to build and run the container.
 ## Using it from Docker Hub
 
 ### Links
-(Docker Hub repo)[https://hub.docker.com/r/wplib/php-fpm/]
+(Docker Hub repo)[https://hub.docker.com/r/wplib/php/]
 
-(Docker Cloud repo)[https://cloud.docker.com/swarm/wplib/repository/docker/wplib/php-fpm/]
+(Docker Cloud repo)[https://cloud.docker.com/swarm/wplib/repository/docker/wplib/php/]
 
 
 ### Setup from Docker Hub
-A simple `docker pull wplib/php-fpm` will pull down the latest version.
+A simple `docker pull wplib/php` will pull down the latest version.
 
 
 ### Runtime from Docker Hub
 start - Spin up a Docker container with the correct runtime configs.
 
-`docker run -d --name wplib_php-fpm_7.1.17 --restart unless-stopped --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php-fpm:7.1.17`
+`docker run -d --name wplib_php_7.1 --restart unless-stopped --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php:7.1`
 
 stop - Stop a Docker container.
 
-`docker stop wplib_php-fpm_7.1.17`
+`docker stop wplib_php_7.1`
 
 run - Run a Docker container in the foreground, (all STDOUT and STDERR will go to console). The Container be removed on termination.
 
-`docker run --rm --name wplib_php-fpm_7.1.17 --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php-fpm:7.1.17`
+`docker run --rm --name wplib_php_7.1 --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php:7.1`
 
 shell - Run a shell, (/bin/bash), within a Docker container.
 
-`docker run --rm --name wplib_php-fpm_7.1.17 -i -t --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php-fpm:7.1.17 /bin/bash`
+`docker run --rm --name wplib_php_7.1 -i -t --network wplibbox -p 9000:9000 --mount type=bind,source=/var/www,target=/var/www --mount type=bind,source=/srv/sites,target=/srv/sites wplib/php:7.1 /bin/bash`
 
 rm - Remove the Docker container.
 
-`docker container rm wplib_php-fpm_7.1.17`
+`docker container rm wplib_php_7.1`
 
 
 ## Using it from GitHub repo
@@ -75,7 +87,7 @@ rm - Remove the Docker container.
 ### Setup from GitHub repo
 Simply clone this repository to your local machine
 
-`git clone https://github.com/wplib/php-fpm-docker.git`
+`git clone https://github.com/wplib/php-docker.git`
 
 
 ### Building from GitHub repo
