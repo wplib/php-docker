@@ -246,14 +246,6 @@ mkdir -p /run/php; checkExit
 ln /usr/bin/php-cgi /usr/sbin/php-fpm
 
 
-echo "# WPLib Box: pecl update-channels."
-# Fixup pecl errors.
-# EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
-#     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
-sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
-pecl update-channels; checkExit
-
-
 echo "# WPLib Box: Adding Imagick extension, (3.4.3)."
 cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/imagick-3.4.3.tgz; checkExit
@@ -345,3 +337,10 @@ make install; checkExit
 #make; checkExit
 #make install; checkExit
 
+
+echo "# WPLib Box: pecl update-channels."
+# Fixup pecl errors.
+# EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
+#     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
+sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
+pecl update-channels; checkExit
