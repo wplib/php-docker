@@ -97,7 +97,7 @@ info:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
+	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 endif
 
@@ -107,11 +107,11 @@ ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
 	docker run --rm -it -v `pwd`:/tmp $(PROJECT)/$(NAME)-base:$(VERSION) tar cf /tmp/tarball --exclude=/build --exclude=/etc/hostname --exclude=/etc/hosts --exclude=/etc/resolv.conf /bin /etc /home /lib /media /mnt /root /sbin /usr /var
-	-docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f DockerfileTarball .
+	docker build -t $(IMAGE_NAME):$(VERSION) --label container.json='$(call rawJSON)' --label container.project="$(PROJECT)" --label container.name="$(NAME)" --label container.version="$(VERSION)" --label container.majorversion="$(MAJORVERSION)" --label container.latest="$(LATEST)" --label container.class="$(CLASS)" --label container.network="$(NETWORK)" --label container.ports="$(PORTS)" --label container.volumes="$(VOLUMES)" --label container.restart="$(RESTART)" --label container.args="$(ARGS)" --label container.env="$(ENV)" --build-arg $(ENV)="$(VERSION)" $(BUILD_ARGS) -f DockerfileTarball .
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
-	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
+	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
 endif
 
@@ -124,7 +124,7 @@ else
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -m > $(NAME)-modules.txt
 	-docker run --rm -it $(IMAGE_NAME):$(VERSION) php -i > $(NAME)-info.txt
 ifneq ($(MAJORVERSION),)
-	-docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
+	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(MAJORVERSION)
 endif
 	@echo "WPLib: Log file saved to \"logs/$(LOGFILE)\""
 endif
@@ -135,7 +135,7 @@ ifeq ($(PROJECT),)
 else
 	docker push $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
-	-docker push $(IMAGE_NAME):$(MAJORVERSION)
+	docker push $(IMAGE_NAME):$(MAJORVERSION)
 endif
 endif
 
@@ -144,8 +144,11 @@ release: build
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	make clean; make build
-	make push
+	@make clean
+	@make clean-base
+	@make build-base
+	@make build
+	@make push
 endif
 
 
@@ -153,9 +156,9 @@ clean:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	docker image rm $(IMAGE_NAME):$(VERSION)
+	-docker image rm -f $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
-	-docker image rm $(IMAGE_NAME):$(MAJORVERSION)
+	-docker image rm -f $(IMAGE_NAME):$(MAJORVERSION)
 endif
 	-rm php-base-info.txt php-base-modules.txt php-info.txt php-modules.txt tarball
 endif
@@ -165,7 +168,7 @@ list:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	docker image ls $(IMAGE_NAME):$(VERSION)
+	-docker image ls $(IMAGE_NAME):$(VERSION)
 ifneq ($(MAJORVERSION),)
 	-docker image ls $(IMAGE_NAME):$(MAJORVERSION)
 endif
@@ -236,7 +239,7 @@ rm:
 ifeq ($(PROJECT),)
 	@echo "WPLib: ERROR - You need to install JQ or NodeJS."
 else
-	docker container rm $(CONTAINER_NAME)
+	docker container rm -f $(CONTAINER_NAME)
 endif
 
 
