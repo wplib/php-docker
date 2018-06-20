@@ -1,7 +1,7 @@
 phpinfo()
 PHP Version => 5.6.36
 
-System => Linux 8b54519e38f0 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
+System => Linux d13f09766459 4.9.87-linuxkit-aufs #1 SMP Wed Mar 14 15:12:16 UTC 2018 x86_64
 Build Date => Jun 20 2018 01:09:01
 Configure Command =>  './configure'  '--config-cache' '--cache-file=config.cache' '--enable-fpm' '--with-fpm-user=vagrant' '--with-fpm-group=vagrant' '--datadir=/usr/share/php' '--disable-gd-jis-conv' '--disable-short-tags' '--enable-bcmath=shared' '--enable-calendar=shared' '--enable-cgi' '--enable-cli' '--enable-ctype=shared' '--enable-dba=shared' '--enable-dom=shared' '--enable-exif=shared' '--enable-fileinfo=shared' '--enable-ftp=shared' '--enable-gd-native-ttf' '--enable-inline-optimization' '--enable-intl=shared' '--enable-json=shared' '--enable-libxml' '--enable-mbregex=shared' '--enable-mbstring=shared' '--enable-mysqlnd=shared' '--enable-opcache=shared' '--enable-option-checking=fatal' '--enable-pcntl=shared' '--enable-pdo=shared' '--enable-phar=shared' '--enable-phpdbg' '--enable-posix=shared' '--enable-session=shared' '--enable-shared' '--enable-shmop=shared' '--enable-simplexml=shared' '--enable-soap=shared' '--enable-sockets=shared' '--enable-sysvmsg=shared' '--enable-sysvsem=shared' '--enable-sysvshm=shared' '--enable-tokenizer=shared' '--enable-wddx=shared' '--enable-xml=shared' '--enable-xmlreader=shared' '--enable-xmlwriter=shared' '--enable-zip=shared' '--libdir=/usr/lib/php' '--localstatedir=/var' '--mandir=/usr/share/man' '--prefix=/usr' '--sysconfdir=/etc/php' '--with-bz2=shared' '--without-cdb' '--with-config-file-path=/etc/php' '--with-config-file-scan-dir=/etc/php/conf.d' '--with-curl=shared' '--with-db4' '--with-dbmaker=shared' '--with-enchant=shared' '--with-freetype-dir=/usr' '--with-gd=shared' '--with-gdbm' '--with-gettext=shared' '--with-gmp=shared' '--with-iconv=shared' '--with-icu-dir=/usr' '--with-imap-ssl' '--with-imap=shared' '--with-jpeg-dir=/usr' '--with-kerberos' '--with-layout=GNU' '--with-ldap-sasl' '--with-ldap=shared' '--with-libedit' '--with-libxml-dir=/usr' '--with-libzip=/usr' '--with-mcrypt=shared' '--with-mhash=shared' '--with-mssql=shared' '--with-mysql-sock=/run/mysqld/mysqld.sock' '--with-mysql=shared,mysqlnd' '--with-mysqli=shared,mysqlnd' '--with-openssl=shared' '--with-pcre-regex=/usr' '--with-pdo-dblib=shared' '--with-pdo-mysql=shared,mysqlnd' '--with-pdo-odbc=shared,unixODBC,/usr' '--with-pdo-pgsql=shared' '--with-pdo-sqlite=shared,/usr' '--with-pear=/usr/share/php' '--with-pgsql=shared' '--with-pic' '--with-png-dir=/usr' '--with-pspell=shared' '--with-recode=shared' '--with-readline' '--with-regex=php' '--with-snmp=shared' '--with-sqlite3=shared,/usr' '--with-system-ciphers' '--with-tidy=shared' '--with-unixODBC=shared,/usr' '--with-xmlrpc=shared' '--with-xpm-dir=/usr' '--with-xsl=shared' '--with-zlib' '--with-zlib-dir=/usr' '--without-db1' '--without-db2' '--without-db3' '--without-qdbm' 'CFLAGS=-fstack-protector-strong '-fpic' '-fpie' '-O2'' 'LDFLAGS=-Wl,-O1 '-Wl,--hash-style=both' '-pie'' 'CPPFLAGS=-fstack-protector-strong '-fpic' '-fpie' '-O2''
 Server API => Command Line Interface
@@ -858,7 +858,7 @@ Environment
 
 Variable => Value
 PATH => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME => 8b54519e38f0
+HOSTNAME => d13f09766459
 TERM => xterm
 BASE_BUILD =>  
 PACKAGE_VERSION => 5.6.36
@@ -874,7 +874,7 @@ PHP Variables
 
 Variable => Value
 _SERVER["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_SERVER["HOSTNAME"] => 8b54519e38f0
+_SERVER["HOSTNAME"] => d13f09766459
 _SERVER["TERM"] => xterm
 _SERVER["BASE_BUILD"] => 
 _SERVER["PACKAGE_VERSION"] => 5.6.36
@@ -890,15 +890,15 @@ _SERVER["SCRIPT_NAME"] =>
 _SERVER["SCRIPT_FILENAME"] => 
 _SERVER["PATH_TRANSLATED"] => 
 _SERVER["DOCUMENT_ROOT"] => 
-_SERVER["REQUEST_TIME_FLOAT"] => 1529457524.5894
-_SERVER["REQUEST_TIME"] => 1529457524
+_SERVER["REQUEST_TIME_FLOAT"] => 1529457258.8677
+_SERVER["REQUEST_TIME"] => 1529457258
 _SERVER["argv"] => Array
 (
 )
 
 _SERVER["argc"] => 0
 _ENV["PATH"] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-_ENV["HOSTNAME"] => 8b54519e38f0
+_ENV["HOSTNAME"] => d13f09766459
 _ENV["TERM"] => xterm
 _ENV["BASE_BUILD"] => 
 _ENV["PACKAGE_VERSION"] => 5.6.36

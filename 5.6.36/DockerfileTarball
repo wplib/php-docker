@@ -28,7 +28,7 @@ COPY container.json /etc/container.json
 COPY files /
 COPY tarball /tmp
 
-RUN ls -l /tmp && cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball && mkdir /run/php
+RUN cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball && mkdir /run/php
 
 WORKDIR /var/www
 # USER vagrant
