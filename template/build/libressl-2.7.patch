@@ -1,7 +1,7 @@
-diff --git a/ext/openssl/openssl.c php-7.2.6/ext/openssl/openssl.c
+diff --git a/ext/openssl/openssl.c php-%%VERSION%%/ext/openssl/openssl.c
 index 524192a..9c126a2 100644
 --- a/ext/openssl/openssl.c
-+++ php-7.2.6/ext/openssl/openssl.c
++++ php-%%VERSION%%/ext/openssl/openssl.c
 @@ -566,7 +566,7 @@ ZEND_GET_MODULE(openssl)
  #endif
  

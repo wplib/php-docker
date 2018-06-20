@@ -3,7 +3,7 @@ together, and that's what we want.
 
 Source: https://src.fedoraproject.org/cgit/rpms/php.git/tree/php-5.3.0-recode.patch?h=f26
 --- a/ext/recode/config9.m4
-+++ php-7.2.6/ext/recode/config9.m4
++++ php-%%VERSION%%/ext/recode/config9.m4
 @@ -4,13 +4,6 @@ dnl
  
  dnl Check for extensions with which Recode can not work

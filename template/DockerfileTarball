@@ -1,4 +1,5 @@
 FROM alpine:3.7
+# FROM wplib/php-base:%%VERSION%%
 
 MAINTAINER WPLib Team <team@wplib.org>
 
@@ -25,13 +26,13 @@ USER root
 COPY build/* /build/
 COPY container.json /etc/container.json
 COPY files /
+COPY tarball /tmp
 
-RUN	/bin/sh /build/build.sh && \
-	wget -nv https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 && \
-	mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail && \
-	chmod a+x /usr/local/bin/*
+RUN	cd / && tar xf /tmp/tarball && /bin/sh /build/cleanup.sh && rm /tmp/tarball
+
+COPY files /
 
 WORKDIR /var/www
-USER vagrant
+# USER vagrant
 # ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
 CMD ["/usr/sbin/php-fpm", "-F"]
