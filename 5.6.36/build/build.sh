@@ -58,12 +58,13 @@ echo "# WPLib: Patching PHP ${PACKAGE_VERSION}."
 cd ${BUILDDIR}; checkExit
 # patch -p0 < install-pear.patch; checkExit
 # patch -p0 < libressl-2.7.patch; checkExit
-# patch -p0 < allow-build-recode-and-imap-together.patch; checkExit
+patch -p0 < allow-build-recode-and-imap-together.patch; checkExit
 ln /usr/include/tidybuffio.h /usr/include/buffio.h
 
 
 echo "# WPLib Box: Configure PHP ${PACKAGE_VERSION}."
 cd ${PHPDIR}; checkExit
+autoconf; checkExit
 ./configure --config-cache --cache-file=config.cache \
 	--enable-fpm --with-fpm-user=${WPLIB_USER} --with-fpm-group=${WPLIB_GROUP} \
 	--datadir=/usr/share/php \
@@ -115,7 +116,7 @@ cd ${PHPDIR}; checkExit
 	--prefix=/usr \
 	--sysconfdir=/etc/php \
 	--with-bz2=shared \
-	--with-cdb=shared \
+	--without-cdb \
 	--with-config-file-path=/etc/php \
 	--with-config-file-scan-dir=/etc/php/conf.d \
 	--with-curl=shared \
@@ -195,14 +196,6 @@ rmdir /usr/include/php/include; checkExit
 mkdir -p /run/php; checkExit
 
 
-echo "# WPLib Box: pecl update-channels."
-# Fixup pecl errors.
-# EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
-#     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
-sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
-pecl update-channels; checkExit
-
-
 echo "# WPLib Box: Adding Imagick extension, (3.4.3)."
 cd ${PHPDIR}/ext; checkExit
 wget -nv http://pecl.php.net/get/imagick-3.4.3.tgz; checkExit
@@ -225,23 +218,33 @@ make; checkExit
 make install; checkExit
 
 
-echo "# WPLib Box: Adding ssh2 extension, (1.1.2)."
+echo "# WPLib Box: Adding ssh2 extension, (0.13)."
 cd ${PHPDIR}/ext; checkExit
-wget -nv http://pecl.php.net/get/ssh2-1.1.2.tgz; checkExit
-tar zxf ssh2-1.1.2.tgz; checkExit
-cd ssh2-1.1.2; checkExit
+wget -nv http://pecl.php.net/get/ssh2-0.13.tgz; checkExit
+tar zxf ssh2-0.13.tgz; checkExit
+cd ssh2-0.13; checkExit
 phpize; checkExit
 ./configure; checkExit
 make; checkExit
 make install; checkExit
 
 
-echo "# WPLib Box: Adding libsodium extension, (2.0.11)."
-cd ${PHPDIR}/ext; checkExit
-wget -nv http://pecl.php.net/get/libsodium-2.0.11.tgz; checkExit
-tar zxf libsodium-2.0.11.tgz; checkExit
-cd libsodium-2.0.11; checkExit
-phpize; checkExit
-./configure; checkExit
-make; checkExit
-make install; checkExit
+# Produces this error:
+# Failed loading /usr/lib/php/modules/opcache.so:  Error relocating /usr/lib/php/modules/opcache.so: expand_filepath_ex: symbol not found
+#echo "# WPLib Box: Adding libsodium extension, (2.0.11)."
+#cd ${PHPDIR}/ext; checkExit
+#wget -nv http://pecl.php.net/get/libsodium-2.0.11.tgz; checkExit
+#tar zxf libsodium-2.0.11.tgz; checkExit
+#cd libsodium-2.0.11; checkExit
+#phpize; checkExit
+#./configure; checkExit
+#make; checkExit
+#make install; checkExit
+
+
+echo "# WPLib Box: pecl update-channels."
+# Fixup pecl errors.
+# EG: "Warning: Invalid argument supplied for foreach() in /usr/share/pear/PEAR/Command.php
+#     "Warning: Invalid argument supplied for foreach() in Command.php on line 249"
+sed -i 's/^exec $PHP -C -n -q/exec $PHP -C -q/' /usr/bin/pecl; checkExit
+pecl update-channels; checkExit
