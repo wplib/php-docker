@@ -7,16 +7,6 @@
 ![PHP 5.3.29](https://img.shields.io/badge/PHP-5.3.29-green.svg)
 ![PHP 5.2.4](https://img.shields.io/badge/PHP-5.2.4-green.svg)
 
-
-```
- __          _______  _      _ _       ____
- \ \        / /  __ \| |    (_) |     |  _ \
-  \ \  /\  / /| |__) | |     _| |__   | |_) | _____  __
-   \ \/  \/ / |  ___/| |    | | '_ \  |  _ < / _ \ \/ /
-    \  /\  /  | |    | |____| | |_) | | |_) | (_) >  <
-     \/  \/   |_|    |______|_|_.__/  |____/ \___/_/\_\
-```
-
 ![WPLib-Box](https://github.com/wplib/wplib.github.io/raw/master/WPLib-Box-100x.png)
 
 
